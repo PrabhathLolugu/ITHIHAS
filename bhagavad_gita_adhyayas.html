@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhagavad Gita Adhyayas - ITHIHAS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #E50914;
+            --background-dark: #141414;
+            --background-light: #2F2F2F;
+            --text-color: #FFFFFF;
+            --gradient-overlay: linear-gradient(to top, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0.6));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Netflix Sans', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav.scrolled {
+            background-color: var(--background-dark);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            height: 80vh;
+            background: url('assets/images/Bhagawad geetha.jpeg') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+            margin-bottom: 50px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-overlay);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .adhyayas-container {
+            padding: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .timeline-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem auto;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .timeline-arrow {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .timeline-arrow:hover {
+            color: var(--primary-color);
+        }
+
+        .timeline-progress {
+            flex-grow: 1;
+            margin: 0 2rem;
+            height: 4px;
+            background: var(--background-light);
+            position: relative;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .adhyaya-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .adhyaya-card {
+            background: var(--background-light);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .adhyaya-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .adhyaya-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .adhyaya-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .bookmark-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .bookmark-btn i.fas {
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--background-dark);
+            position: relative;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .key-concepts {
+            padding: 1rem;
+        }
+
+        .concept-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .concept-item i {
+            color: var(--primary-color);
+            font-size: 0.8rem;
+        }
+
+        .adhyaya-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .adhyaya-content {
+            padding: 20px;
+        }
+
+        .adhyaya-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .adhyaya-description {
+            color: #CCC;
+            margin-bottom: 15px;
+        }
+
+        .key-verses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .verse-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #CCC;
+            font-size: 0.9rem;
+        }
+
+        .verse-item i {
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-top:hover {
+            background-color: #ff0f1a;
+        }
+
+        .character-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .character-link:hover {
+            color: #ff0f1a;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .adhyaya-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            nav {
+                padding: 15px 20px;
+            }
+
+            .timeline-nav {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="practice.html" class="logo">ITHIHAS</a>
+        <div class="nav-links">
+            <a href="practice.html">Home</a>
+            <a href="ramayana.html">Ramayana</a>
+            <a href="mahabharath.html">Mahabharatha</a>
+            <a href="bhagavadgita.html">BhagavathGita</a>
+            <a href="bhagavadgita_characters.html">Characters</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Bhagavad Gita</h1>
+            <p>Explore the divine dialogue between Krishna and Arjuna through eighteen chapters</p>
+        </div>
+    </section>
+
+    <main class="adhyayas-container">
+        <h2 class="section-title">The Eighteen Adhyayas</h2>
+        
+        <div class="timeline-nav">
+            <button class="timeline-arrow prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="timeline-progress">
+                <div class="timeline-marker" style="left: 0%"></div>
+            </div>
+            <button class="timeline-arrow next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="adhyaya-grid">
+            <!-- Arjuna Vishada Yoga -->
+            <div class="adhyaya-card" data-adhyaya="1">
+                <div class="adhyaya-header">
+                    <span class="adhyaya-number">01</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <img src="assets/images/Bhagavathgita_adhyayanas/g1.jpeg" alt="Arjuna Vishada Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">1. Arjuna Vishada Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Arjuna's Despondency - Arjuna's dilemma at the battlefield of Kurukshetra.</p>
+                    <div class="key-concepts">
+                        <h4>Key Verses & Concepts:</h4>
+                        <div class="concept-item">
+                            <i class="fas fa-circle"></i>
+                            <span>Arjuna's observation of armies</span>
+                        </div>
+                        <div class="concept-item">
+                            <i class="fas fa-circle"></i>
+                            <span>Moral dilemma of fighting family</span>
+                        </div>
+                        <div class="concept-item">
+                            <i class="fas fa-circle"></i>
+                            <span>Effects of war on society</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g2.jpeg" alt="Sankhya Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">2. Sankhya Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Knowledge - Krishna begins his teachings with the nature of the soul.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Immortal Soul</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Karma Yoga</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g3.jpeg" alt="Karma Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">3. Karma Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Action - The importance of performing one's duties without attachment.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Selfless Action</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Right Action</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g4.jpeg" alt="Jnana Karma Sanyasa Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">4. Jnana Karma Sanyasa Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Knowledge and Renunciation of Action - Divine incarnations and transcendental knowledge.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Divine Descent</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Sacred Knowledge</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g5.jpeg" alt="Karma Sanyasa Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">5. Karma Sanyasa Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Renunciation - The path of renunciation and meditation.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>True Renunciation</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Self-Control</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g6.jpeg" alt="Dhyana Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">6. Dhyana Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Meditation - The science of self-realization through meditation.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Meditation Practice</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Yogic Path</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g7.jpeg" alt="Jnana Vijnana Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">7. Jnana Vijnana Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Knowledge and Realization - Krishna reveals His complete nature.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Divine Nature</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Supreme Truth</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g8.jpeg" alt="Akshara Brahma Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">8. Akshara Brahma Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of the Imperishable Brahman - The cosmic manifestation and the nature of devotional service.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Supreme Abode</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Final Moment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g9.jpeg" alt="Raja Vidya Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">9. Raja Vidya Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Royal Knowledge - The most confidential knowledge about devotional service.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Supreme Secret</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Pure Devotion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g10.jpeg" alt="Vibhuti Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">10. Vibhuti Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Divine Manifestations - Krishna's divine opulences and manifestations.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Divine Glory</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Divine Forms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g11.jpeg" alt="Vishwarupa Darshana Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">11. Vishwarupa Darshana Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of the Universal Form - Krishna reveals His cosmic form to Arjuna.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Universal Vision</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Divine Grace</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g12.jpeg" alt="Bhakti Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">12. Bhakti Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Devotion - The path of devotional service and its superiority.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Path of Love</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Divine Qualities</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g13.jpeg" alt="Kshetra Kshetrajna Vibhaga Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">13. Kshetra Kshetrajna Vibhaga Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of the Field and its Knower - Understanding matter and consciousness.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Field of Activity</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>True Knowledge</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g14.jpeg" alt="Gunatraya Vibhaga Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">14. Gunatraya Vibhaga Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of the Three Modes of Material Nature - Understanding the three gunas.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Material Modes</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Transcendence</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g15.jpeg" alt="Purushottama Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">15. Purushottama Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of the Supreme Person - Understanding the ultimate purpose of Vedic knowledge.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Supreme Person</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Eternal Truth</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g16.jpeg" alt="Daivasura Sampad Vibhaga Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">16. Daivasura Sampad Vibhaga Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Divine and Demonic Natures - Understanding different types of beings.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Divine Nature</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Right Action</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g17.jpeg" alt="Shraddhatraya Vibhaga Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">17. Shraddhatraya Vibhaga Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of the Threefold Faith - Understanding different types of faith.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Types of Faith</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Sacred Sound</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="adhyaya-card">
+                <img src="assets/images/Bhagavathgita_adhyayanas/g18.jpeg" alt="Moksha Sannyasa Yoga" class="adhyaya-image">
+                <div class="adhyaya-content">
+                    <h3 class="adhyaya-title">18. Moksha Sannyasa Yoga</h3>
+                    <p class="adhyaya-description">The Yoga of Liberation - The perfection of renunciation and the essence of the Bhagavad Gita.</p>
+                    <div class="key-verses">
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Final Teaching</span>
+                        </div>
+                        <div class="verse-item">
+                            <i class="fas fa-om"></i>
+                            <span>Supreme Path</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        const nav = document.querySelector('nav');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Timeline navigation
+        let currentAdhyaya = 0;
+        const totalAdhyayas = 18;
+        const prevBtn = document.querySelector('.timeline-arrow.prev');
+        const nextBtn = document.querySelector('.timeline-arrow.next');
+        const timelineMarker = document.querySelector('.timeline-marker');
+
+        function updateTimeline() {
+            const progress = (currentAdhyaya / (totalAdhyayas - 1)) * 100;
+            timelineMarker.style.left = `${progress}%`;
+            
+            // Update active card
+            document.querySelectorAll('.adhyaya-card').forEach((card, index) => {
+                card.style.opacity = index === currentAdhyaya ? '1' : '0.7';
+            });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentAdhyaya > 0) {
+                currentAdhyaya--;
+                updateTimeline();
+                const targetCard = document.querySelector(`[data-adhyaya="${currentAdhyaya + 1}"]`);
+                targetCard.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentAdhyaya < totalAdhyayas - 1) {
+                currentAdhyaya++;
+                updateTimeline();
+                const targetCard = document.querySelector(`[data-adhyaya="${currentAdhyaya + 1}"]`);
+                targetCard.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Bookmark functionality
+        const bookmarkBtns = document.querySelectorAll('.bookmark-btn');
+        const bookmarks = JSON.parse(localStorage.getItem('gitaBookmarks')) || [];
+
+        function initializeBookmarks() {
+            bookmarkBtns.forEach((btn, index) => {
+                const icon = btn.querySelector('i');
+                if (bookmarks.includes(index + 1)) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                }
+            });
+        }
+
+        bookmarkBtns.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                const icon = btn.querySelector('i');
+                const adhyayaNumber = index + 1;
+                
+                if (bookmarks.includes(adhyayaNumber)) {
+                    // Remove bookmark
+                    const bookmarkIndex = bookmarks.indexOf(adhyayaNumber);
+                    bookmarks.splice(bookmarkIndex, 1);
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                } else {
+                    // Add bookmark
+                    bookmarks.push(adhyayaNumber);
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                }
+                
+                localStorage.setItem('gitaBookmarks', JSON.stringify(bookmarks));
+            });
+        });
+
+        // Initialize features
+        updateTimeline();
+        initializeBookmarks();
+    </script>
+</body>
+</html>

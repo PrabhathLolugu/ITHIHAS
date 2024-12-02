@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About ITHIHAS - Indian Mythological Story Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --text-color: #ffffff;
+            --bg-color: #141414;
+            --bg-light: #1f1f1f;
+            --bg-dark: #0f0f0f;
+            --border-color: #2f2f2f;
+            --accent-color: #ffd700;
+            --gradient-1: linear-gradient(45deg, #FF416C, #FF4B2B);
+            --gradient-2: linear-gradient(45deg, #4776E6, #8E54E9);
+            --gradient-3: linear-gradient(45deg, #FFD700, #FFA500);
+        }
+
+        :root[data-theme="light"] {
+            --primary-color: #e50914;
+            --text-color: #141414;
+            --bg-color: #ffffff;
+            --bg-light: #f5f5f5;
+            --bg-dark: #e5e5e5;
+            --border-color: #dcdcdc;
+            --accent-color: #ffd700;
+            --gradient-1: linear-gradient(45deg, #FF416C, #FF4B2B);
+            --gradient-2: linear-gradient(45deg, #4776E6, #8E54E9);
+            --gradient-3: linear-gradient(45deg, #FFD700, #FFA500);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --card-bg: #ffffff;
+            --input-bg: #f5f5f5;
+            --input-border: #e0e0e0;
+            --hover-bg: #f0f0f0;
+            --modal-bg: #ffffff;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        :root[data-theme="dark"] {
+            --primary-color: #e50914;
+            --text-color: #ffffff;
+            --bg-color: #141414;
+            --bg-light: #1f1f1f;
+            --bg-dark: #0f0f0f;
+            --border-color: #2f2f2f;
+            --accent-color: #ffd700;
+            --gradient-1: linear-gradient(45deg, #FF416C, #FF4B2B);
+            --gradient-2: linear-gradient(45deg, #4776E6, #8E54E9);
+            --gradient-3: linear-gradient(45deg, #FFD700, #FFA500);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --card-bg: #1f1f1f;
+            --input-bg: #2b2b2b;
+            --input-border: #404040;
+            --hover-bg: #2a2a2a;
+            --modal-bg: #1f1f1f;
+            --nav-bg: rgba(20, 20, 20, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Theme Transition */
+        * {
+            transition: background-color 0.3s ease, 
+                      color 0.3s ease, 
+                      border-color 0.3s ease, 
+                      box-shadow 0.3s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            gap: 2rem;
+        }
+
+        .navbar.scrolled {
+            background: var(--nav-bg);
+        }
+
+        .nav-brand {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-brand a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .nav-brand span {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .nav-sections {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: var(--hover-bg);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+            background: rgba(229, 9, 20, 0.1);
+            font-weight: 500;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            padding-left: 2.5rem;
+            border-radius: 50px;
+            border: 2px solid var(--input-border);
+            background: var(--input-bg);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .search-bar:focus {
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+        }
+
+        .search-bar:focus + i {
+            color: var(--primary-color);
+            opacity: 1;
+        }
+
+        .theme-toggle {
+            background: var(--input-bg);
+            border: 2px solid var(--input-border);
+            color: var(--text-color);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 5rem 2rem;
+            background: var(--bg-color);
+        }
+
+        .steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 10px;
+        }
+
+        .step-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            min-width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+        }
+
+        /* Technology Stack Section */
+        .tech-stack {
+            padding: 5rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tech-card {
+            background: var(--bg-dark);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: scale(1.05);
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            background: var(--bg-dark);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-sections {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--bg-color);
+                padding: 1rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .nav-sections.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-links a {
+                padding: 1rem;
+                border-radius: 8px;
+            }
+
+            .nav-links a:hover {
+                background: var(--hover-bg);
+            }
+
+            .nav-right {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--text-color);
+                font-size: 1.5rem;
+                cursor: pointer;
+                padding: 0.5rem;
+                margin-left: auto;
+            }
+
+            .nav-brand {
+                flex-grow: 0;
+            }
+
+            .nav-brand img {
+                width: 32px;
+                height: 32px;
+            }
+
+            .nav-brand span {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">
+                <img src="./Logo/Logo.jpg" alt="ITHIHAS Logo" style="width: 40px; height: 40px; border-radius: 8px;">
+                <span>ITHIHAS</span>
+            </a>
+        </div>
+        <div class="nav-sections">
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="about.html" class="active"><i class="fas fa-info-circle"></i> About</a>
+                <a href="library.html"><i class="fas fa-book"></i> Library</a>
+                <a href="story-generator.html"><i class="fas fa-magic"></i> Story Generator</a>
+                <a href="#features"><i class="fas fa-star"></i> Features</a>
+                <a href="#team"><i class="fas fa-users"></i> Team</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search stories...">
+                <i class="fas fa-search"></i>
+            </div>
+            <button class="theme-toggle">
+                <i class="fas fa-moon"></i>
+                <span>Theme</span>
+            </button>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <h1>ITHIHAS</h1>
+            <p>Discover the timeless wisdom of Indian mythology through AI-powered storytelling</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title" data-aos="fade-up">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-robot feature-icon"></i>
+                <h3 class="feature-title">AI-Powered Generation</h3>
+                <p>Advanced AI technology creates unique stories while maintaining cultural authenticity</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-book-open feature-icon"></i>
+                <h3 class="feature-title">Rich Story Library</h3>
+                <p>Extensive collection of mythological tales across various categories</p>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-sliders-h feature-icon"></i>
+                <h3 class="feature-title">Customizable Stories</h3>
+                <p>Tailor stories based on themes, characters, and moral values</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2 class="section-title" data-aos="fade-up">How It Works</h2>
+        <div class="steps">
+            <div class="step" data-aos="fade-right">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Choose Your Parameters</h3>
+                    <p>Select from various story types, themes, characters, and settings to customize your story</p>
+                </div>
+            </div>
+            <div class="step" data-aos="fade-left">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>AI Generation</h3>
+                    <p>Our advanced AI model processes your choices and creates a unique story while maintaining cultural authenticity</p>
+                </div>
+            </div>
+            <div class="step" data-aos="fade-right">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Enjoy Your Story</h3>
+                    <p>Read your generated story, complete with moral values and cultural insights</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="tech-stack">
+        <h2 class="section-title" data-aos="fade-up">Technology Stack</h2>
+        <div class="tech-grid">
+            <div class="tech-card" data-aos="zoom-in" data-aos-delay="100">
+                <i class="fab fa-node-js tech-icon"></i>
+                <h3>Node.js</h3>
+                <p>Backend Server</p>
+            </div>
+            <div class="tech-card" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fas fa-brain tech-icon"></i>
+                <h3>Ollama</h3>
+                <p>AI Model</p>
+            </div>
+            <div class="tech-card" data-aos="zoom-in" data-aos-delay="300">
+                <i class="fab fa-js tech-icon"></i>
+                <h3>JavaScript</h3>
+                <p>Frontend Logic</p>
+            </div>
+            <div class="tech-card" data-aos="zoom-in" data-aos-delay="400">
+                <i class="fab fa-html5 tech-icon"></i>
+                <h3>HTML5/CSS3</h3>
+                <p>Modern UI</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>ITHIHAS</h3>
+            <p>Bringing ancient wisdom to modern audiences through AI-powered storytelling</p>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Library for Animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Particle.js for background effects -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ffffff',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 0.5
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+    <script>
+        // Theme Management
+        class ThemeManager {
+            constructor() {
+                this.themeToggle = document.querySelector('.theme-toggle');
+                this.root = document.documentElement;
+                this.themeIcon = this.themeToggle.querySelector('i');
+                this.themeText = this.themeToggle.querySelector('span');
+                
+                // Check system preference
+                this.systemPreference = window.matchMedia('(prefers-color-scheme: dark)');
+                
+                // Initialize theme
+                this.currentTheme = localStorage.getItem('theme') || 
+                    (this.systemPreference.matches ? 'dark' : 'light');
+                
+                this.init();
+            }
+
+            init() {
+                // Apply initial theme
+                this.updateTheme(this.currentTheme);
+                
+                // Listen for theme toggle clicks
+                this.themeToggle.addEventListener('click', () => this.toggleTheme());
+                
+                // Listen for system preference changes
+                this.systemPreference.addEventListener('change', (e) => {
+                    if (!localStorage.getItem('theme')) {
+                        this.updateTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+            }
+
+            toggleTheme() {
+                this.currentTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+                this.updateTheme(this.currentTheme);
+                localStorage.setItem('theme', this.currentTheme);
+                
+                // Add animation effect
+                this.themeIcon.style.transform = 'rotate(360deg)';
+                setTimeout(() => {
+                    this.themeIcon.style.transform = 'rotate(0)';
+                }, 300);
+            }
+
+            updateTheme(theme) {
+                this.root.setAttribute('data-theme', theme);
+                this.themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+                this.themeText.textContent = `${theme.charAt(0).toUpperCase() + theme.slice(1)} Mode`;
+                
+                // Update meta theme-color
+                document.querySelector('meta[name="theme-color"]')
+                    .setAttribute('content', theme === 'dark' ? '#141414' : '#ffffff');
+            }
+        }
+
+        // Initialize theme manager
+        const themeManager = new ThemeManager();
+    </script>
+    <script>
+        // Navbar Scroll Effect
+        const navbar = document.querySelector('.navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            if (currentScroll > lastScroll && currentScroll > 500) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Search Functionality
+        const searchBar = document.querySelector('.search-bar');
+        searchBar.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = searchBar.value.trim();
+                if (query) {
+                    // Implement search functionality
+                    console.log('Searching for:', query);
+                }
+            }
+        });
+
+        // Mobile Navigation
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        mobileMenuBtn.addEventListener('click', () => {
+            document.querySelector('.nav-sections').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahabharata Parvas - ITHIHAS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #E50914;
+            --background-dark: #141414;
+            --background-light: #2F2F2F;
+            --text-color: #FFFFFF;
+            --gradient-overlay: linear-gradient(to top, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0.6));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Netflix Sans', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav.scrolled {
+            background-color: var(--background-dark);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            height: 80vh;
+            background: url('assets/images/Mahabharath.jpeg') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+            margin-bottom: 50px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-overlay);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .parvas-container {
+            padding: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .parva-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .parva-card {
+            background: var(--background-light);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .parva-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .parva-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: var(--background-dark);
+            border-bottom: 1px solid #333;
+        }
+
+        .parva-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .bookmark-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .parva-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .parva-content {
+            padding: 20px;
+        }
+
+        .parva-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .parva-description {
+            color: #CCC;
+            margin-bottom: 15px;
+        }
+
+        .key-events {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #CCC;
+            font-size: 0.9rem;
+        }
+
+        .event-item i {
+            color: var(--primary-color);
+        }
+
+        .parva-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .action-btn {
+            background-color: var(--background-dark);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        .read-more {
+            color: var(--text-color);
+        }
+
+        .share-btn {
+            color: var(--text-color);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background-color: #333;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .timeline-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--background-dark);
+            border-bottom: 1px solid #333;
+        }
+
+        .timeline-arrow {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .timeline-track {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-top:hover {
+            background-color: #ff0f1a;
+        }
+
+        .parva-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--background-dark);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="practice.html" class="logo">ITHIHAS</a>
+        <div class="nav-links">
+            <a href="practice.html">Home</a>
+            <a href="ramayana.html">Ramayana</a>
+            <a href="mahabharath.html">Mahabharatha</a>
+            <a href="bhagavadgita.html">BhagavathGita</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">The Great Epic: Mahabharata</h1>
+            <p>Explore the eighteen Parvas of the timeless epic Mahabharata</p>
+        </div>
+    </section>
+
+    <main class="parvas-container">
+        <h2 class="section-title">The Eighteen Parvas</h2>
+        
+        <div class="timeline-nav">
+            <button class="timeline-arrow prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="timeline-track">
+                <!-- Timeline items will be added dynamically -->
+            </div>
+            <button class="timeline-arrow next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="parva-grid">
+            <div class="parva-card" data-parva="1">
+                <div class="parva-header">
+                    <span class="parva-number">01</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/1.jpeg" alt="Adi Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Adi Parva</h3>
+                    <p class="parva-description">The Book of the Beginning - Origins of the Kuru dynasty and early lives of the Pandavas and Kauravas.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Birth of Pandavas</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Draupadi's Swayamvara</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="2">
+                <div class="parva-header">
+                    <span class="parva-number">02</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/2.jpeg" alt="Sabha Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Sabha Parva</h3>
+                    <p class="parva-description">The Book of the Assembly Hall - The game of dice and its tragic consequences.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Game of Dice</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Draupadi's Humiliation</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="3">
+                <div class="parva-header">
+                    <span class="parva-number">03</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/3.jpeg" alt="Vana Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Vana Parva</h3>
+                    <p class="parva-description">The Book of the Forest - The Pandavas' exile in the forest and their various adventures.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Forest Adventures</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Arjuna's Penance</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="4">
+                <div class="parva-header">
+                    <span class="parva-number">04</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/4.jpeg" alt="Virata Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Virata Parva</h3>
+                    <p class="parva-description">The Book of Virata - The Pandavas' thirteenth year of exile in disguise at King Virata's court.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Living in Disguise</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Kichaka's Death</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="5">
+                <div class="parva-header">
+                    <span class="parva-number">05</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/5.jpeg" alt="Udyoga Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Udyoga Parva</h3>
+                    <p class="parva-description">The Book of Effort - Preparations for war and Krishna's peace mission.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Krishna's Embassy</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>War Preparations</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="6">
+                <div class="parva-header">
+                    <span class="parva-number">06</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/6.jpeg" alt="Bhishma Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Bhishma Parva</h3>
+                    <p class="parva-description">The Book of Bhishma - First part of the war under Bhishma's command and the Bhagavad Gita.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Bhagavad Gita</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Bhishma's Fall</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="7">
+                <div class="parva-header">
+                    <span class="parva-number">07</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/7.jpeg" alt="Drona Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Drona Parva</h3>
+                    <p class="parva-description">The Book of Drona - The war under Drona's command and his eventual fall.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Abhimanyu's Death</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Drona's Fall</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="8">
+                <div class="parva-header">
+                    <span class="parva-number">08</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/8.jpeg" alt="Karna Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Karna Parva</h3>
+                    <p class="parva-description">The Book of Karna - Karna's leadership and his final battle with Arjuna.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Karna's Command</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Karna-Arjuna Duel</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="9">
+                <div class="parva-header">
+                    <span class="parva-number">09</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/9.jpeg" alt="Shalya Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Shalya Parva</h3>
+                    <p class="parva-description">The Book of Shalya - The final day of the war and Duryodhana's fall.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Shalya's Command</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Duryodhana's Last Stand</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="10">
+                <div class="parva-header">
+                    <span class="parva-number">10</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/10.jpeg" alt="Sauptika Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Sauptika Parva</h3>
+                    <p class="parva-description">The Book of the Sleeping Warriors - The night raid on the Pandava camp.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Night Massacre</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Ashwatthama's Revenge</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="11">
+                <div class="parva-header">
+                    <span class="parva-number">11</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/11.jpeg" alt="Stri Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Stri Parva</h3>
+                    <p class="parva-description">The Book of the Women - The women's lament and aftermath of the war.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Gandhari's Grief</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Women's Lamentations</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="12">
+                <div class="parva-header">
+                    <span class="parva-number">12</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/12.jpeg" alt="Shanti Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Shanti Parva</h3>
+                    <p class="parva-description">The Book of Peace - Bhishma's teachings on dharma and governance.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Bhishma's Wisdom</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Rajadharma</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="13">
+                <div class="parva-header">
+                    <span class="parva-number">13</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/13.jpeg" alt="Anushasana Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Anushasana Parva</h3>
+                    <p class="parva-description">The Book of Instructions - Bhishma's final teachings on dharma and ethics.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Moral Teachings</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Bhishma's Departure</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="14">
+                <div class="parva-header">
+                    <span class="parva-number">14</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/14.jpeg" alt="Ashvamedhika Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Ashvamedhika Parva</h3>
+                    <p class="parva-description">The Book of the Horse Sacrifice - Yudhishthira's Ashvamedha yajna.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Horse Sacrifice</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Arjuna's Journey</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="15">
+                <div class="parva-header">
+                    <span class="parva-number">15</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/15.jpeg" alt="Ashramavasika Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Ashramavasika Parva</h3>
+                    <p class="parva-description">The Book of the Hermitage - The retirement of Dhritarashtra, Gandhari, and Kunti.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Forest Retreat</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Final Days</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="16">
+                <div class="parva-header">
+                    <span class="parva-number">16</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/16.jpeg" alt="Mausala Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Mausala Parva</h3>
+                    <p class="parva-description">The Book of Clubs - The destruction of the Yadava clan and the tragic end of Krishna's dynasty.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Yadava Civil War</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Krishna's Departure</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="17">
+                <div class="parva-header">
+                    <span class="parva-number">17</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/17.jpeg" alt="Mahaprasthanika Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Mahaprasthanika Parva</h3>
+                    <p class="parva-description">The Book of the Great Journey - The Pandavas' final journey to the Himalayas.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Final Journey</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Draupadi's Fall</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="parva-card" data-parva="18">
+                <div class="parva-header">
+                    <span class="parva-number">18</span>
+                    <button class="bookmark-btn">
+                        <i class="far fa-bookmark"></i>
+                    </button>
+                </div>
+                <img src="assets/images/Mahabharath_parvas/18.jpeg" alt="Svargarohana Parva" class="parva-image" loading="lazy">
+                <div class="parva-content">
+                    <h3 class="parva-title">Svargarohana Parva</h3>
+                    <p class="parva-description">The Book of the Ascent to Heaven - The Pandavas reach heaven and their final destiny.</p>
+                    <div class="key-events">
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Heavenly Ascent</span>
+                        </div>
+                        <div class="event-item">
+                            <i class="fas fa-star"></i>
+                            <span>Final Liberation</span>
+                        </div>
+                    </div>
+                    <div class="parva-actions">
+                        <button class="action-btn read-more">
+                            <i class="fas fa-book-open"></i>
+                            Read More
+                        </button>
+                        <button class="action-btn share-btn">
+                            <i class="fas fa-share-alt"></i>
+                            Share
+                        </button>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <div class="parva-modal">
+        <div class="modal-content">
+            <button class="close-modal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const backToTopButton = document.getElementById('backToTop');
+        const nav = document.querySelector('nav');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                backToTopButton.style.display = 'flex';
+                nav.classList.add('scrolled');
+            } else {
+                backToTopButton.style.display = 'none';
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        const timelineTrack = document.querySelector('.timeline-track');
+        const parvaCards = document.querySelectorAll('.parva-card');
+        const timelineArrows = document.querySelectorAll('.timeline-arrow');
+
+        parvaCards.forEach((card, index) => {
+            const title = card.querySelector('.parva-title').textContent;
+            const item = document.createElement('div');
+            item.className = 'timeline-item';
+            item.textContent = title;
+            if (index === 0) item.classList.add('active');
+            
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+
+            timelineTrack.appendChild(item);
+        });
+
+        timelineArrows.forEach(arrow => {
+            arrow.addEventListener('click', () => {
+                const direction = arrow.classList.contains('prev') ? -1 : 1;
+                timelineTrack.scrollBy({
+                    left: direction * 300,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const bookmarkBtns = document.querySelectorAll('.bookmark-btn');
+        bookmarkBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                const icon = btn.querySelector('i');
+                icon.classList.toggle('far');
+                icon.classList.toggle('fas');
+                
+                const parvaCard = btn.closest('.parva-card');
+                const parvaTitle = parvaCard.querySelector('.parva-title').textContent;
+                const bookmarks = JSON.parse(localStorage.getItem('parvaBookmarks') || '[]');
+                
+                if (btn.classList.contains('active')) {
+                    bookmarks.push(parvaTitle);
+                } else {
+                    const index = bookmarks.indexOf(parvaTitle);
+                    if (index > -1) bookmarks.splice(index, 1);
+                }
+                
+                localStorage.setItem('parvaBookmarks', JSON.stringify(bookmarks));
+            });
+        });
+
+        const progressBars = document.querySelectorAll('.progress-bar');
+        progressBars.forEach(bar => {
+            const progress = bar.querySelector('.progress');
+            const parvaCard = bar.closest('.parva-card');
+            const parvaTitle = parvaCard.querySelector('.parva-title').textContent;
+            
+            const savedProgress = localStorage.getItem(`progress_${parvaTitle}`);
+            if (savedProgress) {
+                progress.style.width = `${savedProgress}%`;
+            }
+        });
+
+        const shareBtns = document.querySelectorAll('.share-btn');
+        shareBtns.forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const parvaCard = btn.closest('.parva-card');
+                const parvaTitle = parvaCard.querySelector('.parva-title').textContent;
+                
+                try {
+                    await navigator.share({
+                        title: `Mahabharata - ${parvaTitle}`,
+                        text: `Learn about ${parvaTitle} from the Mahabharata`,
+                        url: window.location.href
+                    });
+                } catch (err) {
+                    console.log('Share failed:', err);
+                    const tempInput = document.createElement('input');
+                    tempInput.value = window.location.href;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                    alert('Link copied to clipboard!');
+                }
+            });
+        });
+
+        const modal = document.querySelector('.parva-modal');
+        const closeModal = document.querySelector('.close-modal');
+        const readMoreBtns = document.querySelectorAll('.read-more');
+
+        readMoreBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const parvaCard = btn.closest('.parva-card');
+                const title = parvaCard.querySelector('.parva-title').textContent;
+                const description = parvaCard.querySelector('.parva-description').textContent;
+                const events = Array.from(parvaCard.querySelectorAll('.event-item'))
+                    .map(event => event.textContent.trim());
+                
+                const modalBody = document.querySelector('.modal-body');
+                modalBody.innerHTML = `
+                    <h2 class="modal-title">${title}</h2>
+                    <p class="modal-description">${description}</p>
+                    <div class="modal-events">
+                        <h3>Key Events</h3>
+                        <ul>
+                            ${events.map(event => `<li>${event}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="modal-progress">
+                        <label>Reading Progress</label>
+                        <input type="range" min="0" max="100" value="${parseInt(parvaCard.querySelector('.progress').style.width) || 0}">
+                        <span class="progress-value">0%</span>
+                    </div>
+                `;
+
+                const slider = modalBody.querySelector('input[type="range"]');
+                const progressValue = modalBody.querySelector('.progress-value');
+                slider.addEventListener('input', () => {
+                    progressValue.textContent = `${slider.value}%`;
+                    parvaCard.querySelector('.progress').style.width = `${slider.value}%`;
+                    localStorage.setItem(`progress_${title}`, slider.value);
+                });
+                
+                modal.style.display = 'block';
+                setTimeout(() => modal.classList.add('active'), 10);
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal.click();
+            }
+        });
+
+        function initializeBookmarks() {
+            const bookmarks = JSON.parse(localStorage.getItem('parvaBookmarks') || '[]');
+            bookmarkBtns.forEach(btn => {
+                const parvaCard = btn.closest('.parva-card');
+                const parvaTitle = parvaCard.querySelector('.parva-title').textContent;
+                if (bookmarks.includes(parvaTitle)) {
+                    btn.classList.add('active');
+                    const icon = btn.querySelector('i');
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeBookmarks();
+        });
+    </script>
+</body>
+</html>

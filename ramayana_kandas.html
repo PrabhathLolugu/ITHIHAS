@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ramayana Kandas - ITHIHAS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #e50914;
+        --background-dark: #141414;
+        --background-light: #2f2f2f;
+        --text-color: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Netflix Sans", "Helvetica Neue", Arial, sans-serif;
+        background-color: var(--background-dark);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--background-dark);
+        z-index: 1000;
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary-color);
+      }
+
+      .kandas-container {
+        padding: 80px 4% 40px;
+        color: white;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        padding-left: 2%;
+        color: var(--text-color);
+      }
+
+      .kanda-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        padding: 20px 4%;
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+
+      .kanda-card {
+        background: var(--background-light);
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .kanda-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.8) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+      }
+
+      .kanda-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 10px 20px rgba(229, 9, 20, 0.2);
+      }
+
+      .kanda-card:hover::before {
+        opacity: 1;
+      }
+
+      .kanda-card:hover .kanda-image {
+        transform: scale(1.1);
+      }
+
+      .kanda-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .kanda-content {
+        padding: 15px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .kanda-header {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        transition: background 0.3s ease;
+      }
+
+      .kanda-card:hover .kanda-header {
+        background: rgba(229, 9, 20, 0.8);
+      }
+
+      .kanda-number {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+
+      .kanda-card:hover .kanda-number {
+        color: white;
+      }
+
+      .kanda-title {
+        color: var(--primary-color);
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        transition: color 0.3s ease;
+        position: relative;
+        display: inline-block;
+      }
+
+      .kanda-title::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: width 0.3s ease;
+      }
+
+      .kanda-card:hover .kanda-title::after {
+        width: 100%;
+      }
+
+      .event-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        color: #ccc;
+        transition: transform 0.3s ease, color 0.3s ease;
+        padding-left: 0;
+      }
+
+      .kanda-card:hover .event-item {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .event-item i {
+        color: var(--primary-color);
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+      }
+
+      .kanda-card:hover .event-item i {
+        transform: rotate(360deg);
+      }
+
+      .character-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .character-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--primary-color);
+        transition: width 0.3s ease;
+      }
+
+      .character-link:hover::after {
+        width: 100%;
+      }
+
+      .character-link:hover {
+        color: #ff1a1a;
+      }
+
+      .bookmark-btn {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: transform 0.3s ease, color 0.3s ease;
+        z-index: 2;
+      }
+
+      .bookmark-btn:hover {
+        color: var(--primary-color);
+        transform: scale(1.2);
+      }
+
+      .bookmark-btn.active {
+        color: var(--primary-color);
+        animation: bookmark-pulse 1s ease;
+      }
+
+      @keyframes bookmark-pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @media (max-width: 1200px) {
+        .kanda-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 25px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .kanda-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .kandas-container {
+          padding: 60px 2% 20px;
+        }
+
+        nav {
+          padding: 15px 20px;
+        }
+
+        .logo {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="index.html" class="logo">ITHIHAS</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="mahabharata_parvas.html">Mahabharata</a>
+        <a href="bhagavad_gita_adhyayas.html">Bhagavad Gita</a>
+      </div>
+    </nav>
+
+    <main class="kandas-container">
+      <h2 class="section-title">The Seven Kandas of Ramayana</h2>
+      <div class="kanda-grid">
+        <!-- Bala Kanda -->
+        <div class="kanda-card" data-kanda="1">
+          <div class="kanda-header">
+            <span class="kanda-number">01</span>
+            <button class="bookmark-btn">
+              <i class="far fa-bookmark"></i>
+            </button>
+          </div>
+          <img
+            src="assets/images/Ramayana_kandas/Balkanda.jpeg"
+            alt="Bala Kanda"
+            class="kanda-image"
+          />
+          <div class="kanda-content">
+            <h3 class="kanda-title">Bala Kanda</h3>
+            <p class="kanda-description">
+              The Book of Youth - Chronicles the birth and early life of
+              <a href="ramayana_characters.html#rama" class="character-link"
+                >Lord Rama</a
+              >
+              and his brothers.
+            </p>
+            <div class="key-events">
+              <h4>Key Events</h4>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Birth of
+                  <a href="ramayana_characters.html#rama" class="character-link"
+                    >Rama</a
+                  >
+                  and his brothers</span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Training under
+                  <a
+                    href="ramayana_characters.html#vishwamitra"
+                    class="character-link"
+                    >Sage Vishwamitra</a
+                  ></span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  ><a
+                    href="ramayana_characters.html#rama"
+                    class="character-link"
+                    >Rama</a
+                  >
+                  wins
+                  <a href="ramayana_characters.html#sita" class="character-link"
+                    >Sita's</a
+                  >
+                  hand in marriage</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ayodhya Kanda -->
+        <div class="kanda-card" data-kanda="2">
+          <div class="kanda-header">
+            <span class="kanda-number">02</span>
+            <button class="bookmark-btn">
+              <i class="far fa-bookmark"></i>
+            </button>
+          </div>
+          <img
+            src="assets/images/Ramayana_kandas/Ayodhya khanda.jpeg"
+            alt="Ayodhya Kanda"
+            class="kanda-image"
+          />
+          <div class="kanda-content">
+            <h3 class="kanda-title">Ayodhya Kanda</h3>
+            <p class="kanda-description">
+              The Book of Ayodhya - Details
+              <a href="ramayana_characters.html#rama" class="character-link"
+                >Rama's</a
+              >
+              exile and the events in Ayodhya.
+            </p>
+            <div class="key-events">
+              <h4>Key Events</h4>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  ><a
+                    href="ramayana_characters.html#kaikeyi"
+                    class="character-link"
+                    >Kaikeyi's</a
+                  >
+                  demands</span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  ><a
+                    href="ramayana_characters.html#rama"
+                    class="character-link"
+                    >Rama's</a
+                  >
+                  exile</span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  ><a
+                    href="ramayana_characters.html#bharata"
+                    class="character-link"
+                    >Bharata's</a
+                  >
+                  return</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aranya Kanda -->
+        <div class="kanda-card" data-kanda="3">
+          <div class="kanda-header">
+            <span class="kanda-number">03</span>
+            <button class="bookmark-btn">
+              <i class="far fa-bookmark"></i>
+            </button>
+          </div>
+          <img
+            src="assets/images/Ramayana_kandas/Aranya kanda.jpeg"
+            alt="Aranya Kanda"
+            class="kanda-image"
+          />
+          <div class="kanda-content">
+            <h3 class="kanda-title">Aranya Kanda</h3>
+            <p class="kanda-description">
+              The Book of Forest - Chronicles
+              <a href="ramayana_characters.html#rama" class="character-link"
+                >Rama's</a
+              >
+              life in the forest and
+              <a href="ramayana_characters.html#sita" class="character-link"
+                >Sita's</a
+              >
+              abduction.
+            </p>
+            <div class="key-events">
+              <h4>Key Events</h4>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Meeting
+                  <a
+                    href="ramayana_characters.html#surpanakha"
+                    class="character-link"
+                    >Surpanakha</a
+                  ></span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span>Golden Deer incident</span>
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Abduction of
+                  <a href="ramayana_characters.html#sita" class="character-link"
+                    >Sita</a
+                  ></span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kishkindha Kanda -->
+        <div class="kanda-card" data-kanda="4">
+          <div class="kanda-header">
+            <span class="kanda-number">04</span>
+            <button class="bookmark-btn">
+              <i class="far fa-bookmark"></i>
+            </button>
+          </div>
+          <img
+            src="assets/images/Ramayana_kandas/kiskindha.jpeg"
+            alt="Kishkindha Kanda"
+            class="kanda-image"
+          />
+          <div class="kanda-content">
+            <h3 class="kanda-title">Kishkindha Kanda</h3>
+            <p class="kanda-description">
+              The Book of Kishkindha -
+              <a href="ramayana_characters.html#rama" class="character-link"
+                >Rama's</a
+              >
+              alliance with
+              <a href="ramayana_characters.html#sugriva" class="character-link"
+                >Sugriva</a
+              >
+              and the search for
+              <a href="ramayana_characters.html#sita" class="character-link"
+                >Sita</a
+              >.
+            </p>
+            <div class="key-events">
+              <h4>Key Events</h4>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Meeting
+                  <a
+                    href="ramayana_characters.html#hanuman"
+                    class="character-link"
+                    >Hanuman</a
+                  ></span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Alliance with
+                  <a
+                    href="ramayana_characters.html#sugriva"
+                    class="character-link"
+                    >Sugriva</a
+                  ></span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Search for
+                  <a href="ramayana_characters.html#sita" class="character-link"
+                    >Sita</a
+                  >
+                  begins</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sundara Kanda -->
+        <div class="kanda-card" data-kanda="5">
+          <div class="kanda-header">
+            <span class="kanda-number">05</span>
+            <button class="bookmark-btn">
+              <i class="far fa-bookmark"></i>
+            </button>
+          </div>
+          <img
+            src="assets/images/Ramayana_kandas/sundara kand.jpeg"
+            alt="Sundara Kanda"
+            class="kanda-image"
+          />
+          <div class="kanda-content">
+            <h3 class="kanda-title">Sundara Kanda</h3>
+            <p class="kanda-description">
+              The Book of Beauty -
+              <a href="ramayana_characters.html#hanuman" class="character-link"
+                >Hanuman's</a
+              >
+              journey to Lanka and finding
+              <a href="ramayana_characters.html#sita" class="character-link"
+                >Sita</a
+              >.
+            </p>
+            <div class="key-events">
+              <h4>Key Events</h4>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  ><a
+                    href="ramayana_characters.html#hanuman"
+                    class="character-link"
+                    >Hanuman's</a
+                  >
+                  leap</span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Finding
+                  <a href="ramayana_characters.html#sita" class="character-link"
+                    >Sita</a
+                  ></span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span>Burning of Lanka</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yuddha Kanda -->
+        <div class="kanda-card" data-kanda="6">
+          <div class="kanda-header">
+            <span class="kanda-number">06</span>
+            <button class="bookmark-btn">
+              <i class="far fa-bookmark"></i>
+            </button>
+          </div>
+          <img
+            src="assets/images/Ramayana_kandas/yudha khanda.jpeg"
+            alt="Yuddha Kanda"
+            class="kanda-image"
+          />
+          <div class="kanda-content">
+            <h3 class="kanda-title">Yuddha Kanda</h3>
+            <p class="kanda-description">
+              The Book of War - The great battle between
+              <a href="ramayana_characters.html#rama" class="character-link"
+                >Rama</a
+              >
+              and
+              <a href="ramayana_characters.html#ravana" class="character-link"
+                >Ravana</a
+              >.
+            </p>
+            <div class="key-events">
+              <h4>Key Events</h4>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span>Building the bridge to Lanka</span>
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span>The great battle</span>
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Defeat of
+                  <a
+                    href="ramayana_characters.html#ravana"
+                    class="character-link"
+                    >Ravana</a
+                  ></span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Uttara Kanda -->
+        <div class="kanda-card" data-kanda="7">
+          <div class="kanda-header">
+            <span class="kanda-number">07</span>
+            <button class="bookmark-btn">
+              <i class="far fa-bookmark"></i>
+            </button>
+          </div>
+          <img
+            src="assets/images/Ramayana_kandas/uthara khanda.jpeg"
+            alt="Uttara Kanda"
+            class="kanda-image"
+          />
+          <div class="kanda-content">
+            <h3 class="kanda-title">Uttara Kanda</h3>
+            <p class="kanda-description">
+              The Book of Conclusion -
+              <a href="ramayana_characters.html#rama" class="character-link"
+                >Rama's</a
+              >
+              reign and the final events.
+            </p>
+            <div class="key-events">
+              <h4>Key Events</h4>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Coronation of
+                  <a href="ramayana_characters.html#rama" class="character-link"
+                    >Rama</a
+                  ></span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span
+                  >Exile of
+                  <a href="ramayana_characters.html#sita" class="character-link"
+                    >Sita</a
+                  ></span
+                >
+              </div>
+              <div class="event-item">
+                <i class="fas fa-om"></i>
+                <span>Final departure</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const bookmarkBtns = document.querySelectorAll(".bookmark-btn");
+
+        bookmarkBtns.forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const icon = btn.querySelector("i");
+            icon.classList.toggle("far");
+            icon.classList.toggle("fas");
+            btn.classList.toggle("active");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

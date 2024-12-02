@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramayana Characters - ITHIHAS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="practice.css">
+    <style>
+        :root {
+            --primary-color: #E50914;
+            --background-dark: #141414;
+            --background-light: #2F2F2F;
+            --text-color: #FFFFFF;
+            --gradient-overlay: linear-gradient(to top, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0.6));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Netflix Sans', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav.scrolled {
+            background-color: var(--background-dark);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background: url('assets/images/Ramayan/ramayan.jpeg') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-overlay);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Character Grid and Cards */
+        .characters-container {
+            padding: 50px;
+            margin-top: 60px;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .character-card {
+            background: var(--background-light);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .character-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.3);
+        }
+
+        .character-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .character-card:hover .character-image {
+            transform: scale(1.1);
+        }
+
+        .character-content {
+            padding: 25px;
+            position: relative;
+            background: linear-gradient(to top, var(--background-light) 90%, transparent);
+            transform: translateY(60px);
+            transition: transform 0.4s ease;
+        }
+
+        .character-card:hover .character-content {
+            transform: translateY(0);
+        }
+
+        .character-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+
+        .character-card:hover .character-title {
+            transform: translateX(10px);
+        }
+
+        .character-role {
+            font-size: 1.2rem;
+            color: #CCC;
+            margin-bottom: 15px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .character-description {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .character-card:hover .character-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .character-traits {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .character-card:hover .character-traits {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .trait {
+            background: rgba(229, 9, 20, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-top:hover {
+            background-color: #ff0f1a;
+        }
+
+        .character-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--background-light);
+            color: var(--text-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="practice.html" class="logo">ITHIHAS</a>
+        <div class="nav-links">
+            <a href="practice.html">Home</a>
+            <a href="ramayana.html">Ramayana</a>
+            <a href="mahabharath.html">Mahabharata</a>
+            <a href="bhagavadgita.html">Bhagavad Gita</a>
+            <a href="FAQ.html">FAQ</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Characters of Ramayana</h1>
+            <p class="hero-description">Discover the divine and mortal beings who shaped the epic tale of dharma, devotion, and righteousness. From the noble prince Rama to the mighty Hanuman, explore the rich tapestry of characters that bring the Ramayana to life.</p>
+        </div>
+    </section>
+
+    <section class="characters-container">
+        <div class="character-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="divine">Divine Beings</button>
+            <button class="filter-btn" data-filter="ayodhya">Ayodhya</button>
+            <button class="filter-btn" data-filter="lanka">Lanka</button>
+            <button class="filter-btn" data-filter="vanara">Vanara Sena</button>
+        </div>
+
+        <div class="character-grid">
+            <!-- Divine Beings -->
+            <div class="character-card" data-category="divine">
+                <img src="assets/images/Ramayan characters/Rama.jpeg" alt="Lord Rama" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Lord Rama</h3>
+                    <p class="character-role">Prince of Ayodhya, Avatar of Vishnu</p>
+                    <p class="character-description">The seventh avatar of Lord Vishnu, embodiment of dharma and ideal king. Known for his unwavering devotion to duty and righteousness.</p>
+                    <div class="character-traits">
+                        <span class="trait">Righteous</span>
+                        <span class="trait">Dutiful</span>
+                        <span class="trait">Compassionate</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="divine,ayodhya">
+                <img src="assets/images/Ramayan characters/sita.jpeg" alt="Sita" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Sita</h3>
+                    <p class="character-role">Princess of Mithila, Avatar of Lakshmi</p>
+                    <p class="character-description">Daughter of Earth, wife of Lord Rama, and embodiment of wifely devotion and inner strength.</p>
+                    <div class="character-traits">
+                        <span class="trait">Devoted</span>
+                        <span class="trait">Strong-willed</span>
+                        <span class="trait">Pure</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="divine">
+                <img src="assets/images/Ramayan characters/jatayu.jpeg" alt="Jatayu" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Jatayu</h3>
+                    <p class="character-role">Divine Vulture</p>
+                    <p class="character-description">The noble bird who fought Ravana to protect Sita and sacrificed his life in the process.</p>
+                    <div class="character-traits">
+                        <span class="trait">Noble</span>
+                        <span class="trait">Brave</span>
+                        <span class="trait">Selfless</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ayodhya Characters -->
+            <div class="character-card" data-category="ayodhya">
+                <img src="assets/images/Ramayan characters/lakshamana.jpeg" alt="Lakshmana" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Lakshmana</h3>
+                    <p class="character-role">Prince of Ayodhya</p>
+                    <p class="character-description">Rama's devoted younger brother who accompanied him during his exile and fought by his side.</p>
+                    <div class="character-traits">
+                        <span class="trait">Loyal</span>
+                        <span class="trait">Brave</span>
+                        <span class="trait">Skilled Warrior</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="ayodhya">
+                <img src="assets/images/Ramayan characters/dhasharatha.jpeg" alt="Dasharatha" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Dasharatha</h3>
+                    <p class="character-role">King of Ayodhya</p>
+                    <p class="character-description">The father of Rama, known for his righteousness and the tragic dilemma he faced.</p>
+                    <div class="character-traits">
+                        <span class="trait">Just</span>
+                        <span class="trait">Wise</span>
+                        <span class="trait">Loving Father</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="ayodhya">
+                <img src="assets/images/Ramayan characters/Kausalya.jpeg" alt="Kausalya" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Kausalya</h3>
+                    <p class="character-role">Queen of Ayodhya</p>
+                    <p class="character-description">Mother of Rama, a symbol of maternal love and devotion, who plays a crucial role in Rama's upbringing.</p>
+                    <div class="character-traits">
+                        <span class="trait">Loving</span>
+                        <span class="trait">Devoted</span>
+                        <span class="trait">Selfless</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="ayodhya">
+                <img src="assets/images/Ramayan characters/Urmila.jpeg" alt="Urmila" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Urmila</h3>
+                    <p class="character-role">Wife of Lakshmana</p>
+                    <p class="character-description">The devoted wife of Lakshmana who stayed in Ayodhya during the exile, representing silent sacrifice.</p>
+                    <div class="character-traits">
+                        <span class="trait">Devoted</span>
+                        <span class="trait">Patient</span>
+                        <span class="trait">Sacrificing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="ayodhya">
+                <img src="assets/images/Ramayan characters/baratha.jpeg" alt="Bharata" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Bharata</h3>
+                    <p class="character-role">Prince of Ayodhya</p>
+                    <p class="character-description">The righteous brother of Rama who ruled Ayodhya as his regent, keeping Rama's sandals on the throne.</p>
+                    <div class="character-traits">
+                        <span class="trait">Righteous</span>
+                        <span class="trait">Devoted</span>
+                        <span class="trait">Humble</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="ayodhya">
+                <img src="assets/images/Ramayan characters/kikeyi.jpeg" alt="Kaikeyi" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Kaikeyi</h3>
+                    <p class="character-role">Queen of Ayodhya</p>
+                    <p class="character-description">Mother of Bharata, whose actions led to Rama's exile, though she later repented her decisions.</p>
+                    <div class="character-traits">
+                        <span class="trait">Complex</span>
+                        <span class="trait">Influential</span>
+                        <span class="trait">Remorseful</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="ayodhya">
+                <img src="assets/images/Ramayan characters/Sumitra.jpeg" alt="Sumitra" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Sumitra</h3>
+                    <p class="character-role">Queen of Ayodhya</p>
+                    <p class="character-description">Mother of Lakshmana and Shatrughna, known for her wisdom and sacrifice in letting Lakshmana accompany Rama.</p>
+                    <div class="character-traits">
+                        <span class="trait">Wise</span>
+                        <span class="trait">Supportive</span>
+                        <span class="trait">Sacrificing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="ayodhya">
+                <img src="assets/images/Ramayan characters/Manthara.jpeg" alt="Manthara" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Manthara</h3>
+                    <p class="character-role">Maid of Kaikeyi</p>
+                    <p class="character-description">The maid who influenced Kaikeyi to ask for Rama's exile and Bharata's coronation.</p>
+                    <div class="character-traits">
+                        <span class="trait">Manipulative</span>
+                        <span class="trait">Influential</span>
+                        <span class="trait">Scheming</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lanka Characters -->
+            <div class="character-card" data-category="lanka">
+                <img src="assets/images/Ramayan characters/ravan.jpeg" alt="Ravana" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Ravana</h3>
+                    <p class="character-role">King of Lanka</p>
+                    <p class="character-description">The powerful demon king who abducted Sita, leading to the great war.</p>
+                    <div class="character-traits">
+                        <span class="trait">Powerful</span>
+                        <span class="trait">Learned</span>
+                        <span class="trait">Proud</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="lanka">
+                <img src="assets/images/Ramayan characters/Mandodari.jpeg" alt="Mandodari" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Mandodari</h3>
+                    <p class="character-role">Queen of Lanka</p>
+                    <p class="character-description">The principal wife of Ravana, known for her wisdom and attempts to guide her husband away from his destructive path.</p>
+                    <div class="character-traits">
+                        <span class="trait">Wise</span>
+                        <span class="trait">Virtuous</span>
+                        <span class="trait">Devoted</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="lanka">
+                <img src="assets/images/Ramayan characters/indrajit.jpeg" alt="Indrajit" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Indrajit</h3>
+                    <p class="character-role">Prince of Lanka</p>
+                    <p class="character-description">The mighty son of Ravana, who earned his name by defeating Indra, known for his magical warfare abilities.</p>
+                    <div class="character-traits">
+                        <span class="trait">Powerful</span>
+                        <span class="trait">Skilled</span>
+                        <span class="trait">Strategic</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="lanka">
+                <img src="assets/images/Ramayan characters/khumbhakarna.jpeg" alt="Kumbhakarna" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Kumbhakarna</h3>
+                    <p class="character-role">Brother of Ravana</p>
+                    <p class="character-description">A powerful demon, who despite his fearsome appearance, possesses great wisdom and loyalty.</p>
+                    <div class="character-traits">
+                        <span class="trait">Powerful</span>
+                        <span class="trait">Loyal</span>
+                        <span class="trait">Wise</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="lanka">
+                <img src="assets/images/Ramayan characters/vibhishana.jpeg" alt="Vibhishana" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Vibhishana</h3>
+                    <p class="character-role">Brother of Ravana</p>
+                    <p class="character-description">The righteous brother of Ravana who chose dharma over family loyalty and joined Rama's cause.</p>
+                    <div class="character-traits">
+                        <span class="trait">Righteous</span>
+                        <span class="trait">Wise</span>
+                        <span class="trait">Faithful</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="lanka">
+                <img src="assets/images/Ramayan characters/Maricha.jpeg" alt="Maricha" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Maricha</h3>
+                    <p class="character-role">Demon Shapeshifter</p>
+                    <p class="character-description">The demon who transformed into a golden deer to lure Rama away from Sita, enabling her abduction.</p>
+                    <div class="character-traits">
+                        <span class="trait">Cunning</span>
+                        <span class="trait">Deceptive</span>
+                        <span class="trait">Tragic</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vanara Sena -->
+            <div class="character-card" data-category="vanara,divine">
+                <img src="assets/images/Ramayan characters/hanuman.jpeg" alt="Hanuman" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Hanuman</h3>
+                    <p class="character-role">Divine Vanara</p>
+                    <p class="character-description">The mighty vanara who helped Rama find Sita and proved instrumental in the war against Ravana.</p>
+                    <div class="character-traits">
+                        <span class="trait">Devoted</span>
+                        <span class="trait">Powerful</span>
+                        <span class="trait">Wise</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="vanara">
+                <img src="assets/images/Ramayan characters/sugriva.jpeg" alt="Sugriva" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Sugriva</h3>
+                    <p class="character-role">King of Vanaras</p>
+                    <p class="character-description">The king of the vanaras, who forms an alliance with Rama and plays a crucial role in the battle against Ravana.</p>
+                    <div class="character-traits">
+                        <span class="trait">Brave</span>
+                        <span class="trait">Loyal</span>
+                        <span class="trait">Strategic</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="vanara">
+                <img src="assets/images/Ramayan characters/vali.jpeg" alt="Vali" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Vali</h3>
+                    <p class="character-role">Former King of Kishkindha</p>
+                    <p class="character-description">The powerful brother of Sugriva, known for his immense strength and complex relationship with his brother.</p>
+                    <div class="character-traits">
+                        <span class="trait">Powerful</span>
+                        <span class="trait">Complex</span>
+                        <span class="trait">Proud</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card" data-category="vanara">
+                <img src="assets/images/Ramayan characters/Angada.jpeg" alt="Angada" class="character-image">
+                <div class="character-content">
+                    <h3 class="character-title">Angada</h3>
+                    <p class="character-role">Prince of Kishkindha</p>
+                    <p class="character-description">Son of Vali who joins Rama's army, proving to be a valuable ally in the war against Ravana.</p>
+                    <div class="character-traits">
+                        <span class="trait">Loyal</span>
+                        <span class="trait">Brave</span>
+                        <span class="trait">Strong</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('scrolled', window.scrollY > 0);
+        });
+
+        // Character filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const characterCards = document.querySelectorAll('.character-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter');
+
+                    characterCards.forEach(card => {
+                        const categories = card.getAttribute('data-category').split(',');
+                        
+                        if (filterValue === 'all' || categories.includes(filterValue)) {
+                            card.style.display = 'block';
+                            // Add animation
+                            card.style.animation = 'fadeIn 0.5s ease-in-out';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+        // Add fade-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .character-card {
+                animation: fadeIn 0.5s ease-in-out;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

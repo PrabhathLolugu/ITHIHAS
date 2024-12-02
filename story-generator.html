@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ITHIHAS - Story Generator</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #e50914;
+        --text-color: #ffffff;
+        --bg-color: #141414;
+        --bg-light: #1f1f1f;
+        --bg-dark: #0f0f0f;
+        --border-color: #2f2f2f;
+        --nav-height: 60px;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: var(--text-color);
+        line-height: 1.6;
+        background: linear-gradient(-45deg, #2c3e50, #3498db, #8e44ad, #2980b9);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        min-height: 100vh;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* Navigation Styles */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--nav-height);
+        background: rgba(20, 20, 20, 0.8);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        padding: 0 2rem;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-brand {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+        margin-right: 2rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .nav-link:hover {
+        color: var(--primary-color);
+      }
+
+      .nav-link.active {
+        color: var(--primary-color);
+        font-weight: 500;
+      }
+
+      /* Main Content Styles */
+      .container {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: calc(var(--nav-height) + 2rem) auto 2rem;
+        padding: 2rem;
+        background: rgba(20, 20, 20, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 50px;
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      .logo {
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+        background: linear-gradient(45deg, var(--primary-color), #ff4b2b);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .story-form {
+        background: linear-gradient(to bottom right, rgba(20, 20, 20, 0.95), rgba(30, 30, 30, 0.95));
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .form-section {
+        background: rgba(31, 31, 31, 0.6);
+        backdrop-filter: blur(5px);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .form-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+        color: var(--primary-color);
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 10px;
+        color: #ccc;
+        font-weight: 500;
+      }
+
+      select {
+        width: 100%;
+        padding: 12px 15px;
+        background: rgba(0, 0, 0, 0.3);
+        border: 2px solid var(--border-color);
+        border-radius: 10px;
+        color: var(--text-color);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1em;
+      }
+
+      select:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+      }
+
+      .advanced-toggle {
+        text-align: center;
+        margin: 30px 0;
+        padding: 10px;
+      }
+
+      .text-button {
+        background: linear-gradient(45deg, #1a237e, #311b92);
+        border: none;
+        color: #ffffff;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .text-button:hover {
+        background: linear-gradient(45deg, #283593, #4527a0);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .text-button:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .text-button i {
+        font-size: 1.1rem;
+        transition: transform 0.3s ease;
+      }
+
+      .text-button:hover i {
+        transform: rotate(180deg);
+      }
+
+      .button-group {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      .primary-button,
+      .secondary-button {
+        min-width: 200px;
+        padding: 15px 30px;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .primary-button {
+        background: linear-gradient(45deg, var(--primary-color), #ff4b2b);
+        border: none;
+        color: white;
+      }
+
+      .secondary-button {
+        background: transparent;
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+      }
+
+      .primary-button:hover,
+      .secondary-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(229, 9, 20, 0.2);
+      }
+
+      .story-output {
+        max-width: 1000px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+      }
+
+      .story-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .story-title {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin: 0;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: titleGlow 2s ease-in-out infinite;
+      }
+
+      @keyframes titleGlow {
+        0%, 100% {
+          filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.3));
+        }
+        50% {
+          filter: drop-shadow(0 0 20px rgba(229, 9, 20, 0.6));
+        }
+      }
+
+      .story-actions {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .action-button {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: #fff;
+        padding: 0.8rem 1.5rem;
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+      }
+
+      .action-button:hover {
+        background: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
+      }
+
+      .story-container {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-top: 1rem;
+        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+        min-height: 500px;
+      }
+
+      .story-content {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        color: #fff;
+        text-align: justify;
+        white-space: pre-wrap;
+      }
+
+      .story-paragraph {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-bottom: 1.5rem;
+        text-indent: 2rem;
+      }
+
+      .story-paragraph.reveal {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .story-paragraph:first-of-type::first-letter {
+        font-size: 3.5rem;
+        float: left;
+        line-height: 1;
+        padding-right: 0.5rem;
+        color: var(--primary-color);
+      }
+
+      /* Enhanced Dynamic Loading Animation */
+      .loading-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.97);
+        backdrop-filter: blur(20px);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .loading-container.visible {
+        display: flex;
+        animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      @keyframes fadeIn {
+        from { 
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to { 
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .loading-text {
+        font-size: 2.5rem;
+        margin-top: 3rem;
+        color: #fff;
+        text-align: center;
+        font-weight: 300;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        background: linear-gradient(45deg, #ff0000, #ff4081, #8e44ad, #2ecc71, #ff0000);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientText 8s ease infinite;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      }
+
+      @keyframes gradientText {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .loading-messages {
+        margin-top: 3rem;
+        text-align: center;
+        min-height: 30px;
+        perspective: 1000px;
+        font-size: 1.4rem;
+      }
+
+      .loading-message {
+        color: #fff;
+        opacity: 0;
+        position: absolute;
+        left: 50%;
+        transform-origin: center;
+        transform: translate(-50%, -50%) rotateX(-90deg);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        white-space: nowrap;
+      }
+
+      .loading-message.visible {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotateX(0deg);
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        .logo {
+          font-size: 2.5rem;
+        }
+
+        .button-group {
+          flex-direction: column;
+        }
+
+        .primary-button,
+        .secondary-button {
+          width: 100%;
+        }
+      }
+
+      .geometric-loader {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 60px;
+      }
+
+      .hexagon-group {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        transform-style: preserve-3d;
+        animation: rotateGroup 8s linear infinite;
+      }
+
+      .hexagon {
+        position: absolute;
+        width: 80px;
+        height: 88px;
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        background: linear-gradient(45deg, 
+          var(--primary-color),
+          #ff6b6b,
+          #ff3366,
+          #ff1744
+        );
+        background-size: 300% 300%;
+        animation: 
+          pulseAndGlow 2s ease-in-out infinite,
+          gradientShift 3s ease-in-out infinite;
+        transform-origin: center;
+        box-shadow: 
+          0 0 40px rgba(229, 9, 20, 0.6),
+          0 0 80px rgba(229, 9, 20, 0.3),
+          0 0 120px rgba(229, 9, 20, 0.2);
+        filter: brightness(1.2);
+      }
+
+      .hex1 { transform: translate(60px, -104px); animation-delay: 0s; }
+      .hex2 { transform: translate(120px, 0px); animation-delay: 0.3s; }
+      .hex3 { transform: translate(60px, 104px); animation-delay: 0.6s; }
+      .hex4 { transform: translate(-60px, 104px); animation-delay: 0.9s; }
+      .hex5 { transform: translate(-120px, 0px); animation-delay: 1.2s; }
+      .hex6 { transform: translate(-60px, -104px); animation-delay: 1.5s; }
+
+      @keyframes rotateGroup {
+        0% { transform: perspective(2000px) rotateY(0deg) rotateX(25deg); }
+        100% { transform: perspective(2000px) rotateY(360deg) rotateX(25deg); }
+      }
+
+      @keyframes pulseAndGlow {
+        0%, 100% {
+          transform: scale(1) translateZ(0);
+          filter: brightness(1.2) blur(0px);
+        }
+        50% {
+          transform: scale(1.15) translateZ(40px);
+          filter: brightness(1.5) blur(1px);
+        }
+      }
+
+      .loading-message {
+        position: absolute;
+        top: calc(50% + 140px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.5rem;
+        color: #fff;
+        text-align: center;
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        background: linear-gradient(45deg, 
+          var(--primary-color),
+          #ff3366,
+          #ff1744,
+          var(--primary-color)
+        );
+        background-size: 300% 300%;
+        animation: gradientShift 3s ease-in-out infinite;
+        padding: 20px 35px;
+        border-radius: 25px;
+        box-shadow: 
+          0 5px 15px rgba(0, 0, 0, 0.3),
+          0 0 40px rgba(229, 9, 20, 0.3),
+          0 0 80px rgba(229, 9, 20, 0.2);
+        white-space: nowrap;
+        backdrop-filter: blur(5px);
+      }
+
+      .loading-message.visible {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .loading-message::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(45deg, 
+          var(--primary-color),
+          #ff3366,
+          #ff1744,
+          var(--primary-color)
+        );
+        background-size: 300% 300%;
+        animation: gradientShift 3s ease-in-out infinite;
+        border-radius: 23px;
+        z-index: -1;
+        filter: blur(8px);
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">ITHIHAS</a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <a href="story-generator.html" class="nav-link active">
+          <i class="fas fa-magic"></i> Story Generator
+        </a>
+        <a href="library.html" class="nav-link">
+          <i class="fas fa-book"></i> Story Library
+        </a>
+        <a href="about.html" class="nav-link">
+          <i class="fas fa-info-circle"></i> About
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="header">
+        <h1 class="logo">Story Generator</h1>
+        <p class="subtitle">Create captivating Indian mythological stories with AI</p>
+      </div>
+
+      <form class="story-form" id="storyForm">
+        <!-- Basic Options -->
+        <div class="form-section basic-options">
+          <h2 class="section-title"><i class="fas fa-book"></i>Story Options</h2>
+          
+          <div class="form-group">
+            <label for="storyType">Story Type</label>
+            <select id="storyType" required>
+              <option value="">Select a story type</option>
+              <option value="epic">Epic Adventure</option>
+              <option value="moral">Moral Tale</option>
+              <option value="devotional">Devotional Story</option>
+              <option value="philosophical">Philosophical Journey</option>
+              <option value="historical">Historical Legend</option>
+              <option value="folk">Folk Tale</option>
+              <option value="mythical">Divine Intervention</option>
+              <option value="warrior">Warrior Saga</option>
+              <option value="romance">Divine Romance</option>
+              <option value="creation">Creation Myth</option>
+              <option value="transformation">Spiritual Transformation</option>
+              <option value="quest">Sacred Quest</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="theme">Theme</label>
+            <select id="theme" required>
+              <option value="">Select a theme</option>
+              <option value="dharma">Dharma (Duty)</option>
+              <option value="karma">Karma (Action)</option>
+              <option value="bhakti">Bhakti (Devotion)</option>
+              <option value="moksha">Moksha (Liberation)</option>
+              <option value="sacrifice">Sacrifice & Loyalty</option>
+              <option value="wisdom">Knowledge & Wisdom</option>
+              <option value="family">Family & Relationships</option>
+              <option value="power">Power & Leadership</option>
+              <option value="transformation">Spiritual Transformation</option>
+              <option value="justice">Divine Justice</option>
+              <option value="destiny">Destiny & Fate</option>
+              <option value="harmony">Cosmic Harmony</option>
+              <option value="tradition">Sacred Traditions</option>
+              <option value="redemption">Divine Redemption</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mainCharacter">Main Character Type</label>
+            <select id="mainCharacter" required>
+              <option value="">Select character type</option>
+              <option value="deity">Divine Being</option>
+              <option value="sage">Sage/Rishi</option>
+              <option value="warrior">Warrior/Kshatriya</option>
+              <option value="royal">Royal Family Member</option>
+              <option value="devotee">Devoted Seeker</option>
+              <option value="common">Common Person</option>
+              <option value="celestial">Celestial Being</option>
+              <option value="animal">Divine Animal</option>
+              <option value="demon">Asura/Rakshasa</option>
+              <option value="priest">Temple Priest</option>
+              <option value="mystic">Mystic/Yogi</option>
+              <option value="guardian">Divine Guardian</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="setting">Story Setting</label>
+            <select id="setting" required>
+              <option value="">Select a setting</option>
+              <option value="forest">Sacred Forest</option>
+              <option value="kingdom">Ancient Kingdom</option>
+              <option value="ashram">Sage's Ashram</option>
+              <option value="battlefield">Epic Battlefield</option>
+              <option value="celestial">Celestial Realm</option>
+              <option value="pilgrimage">Holy Pilgrimage Site</option>
+              <option value="village">Ancient Village</option>
+              <option value="palace">Royal Palace</option>
+              <option value="mountain">Sacred Mountain</option>
+              <option value="river">Holy River</option>
+              <option value="temple">Ancient Temple</option>
+              <option value="cave">Mystical Cave</option>
+              <option value="island">Sacred Island</option>
+              <option value="desert">Spiritual Desert</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="era">Time Era</label>
+            <select id="era" required>
+              <option value="">Select an era</option>
+              <option value="satya">Satya Yuga</option>
+              <option value="treta">Treta Yuga</option>
+              <option value="dwapara">Dwapara Yuga</option>
+              <option value="kali">Kali Yuga</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Advanced Options Toggle -->
+        <div class="advanced-toggle">
+          <button type="button" class="text-button" id="toggleAdvanced">
+            <i class="fas fa-cog"></i> Advanced Options
+          </button>
+        </div>
+
+        <!-- Advanced Options -->
+        <div class="form-section advanced-options" style="display: none;">
+          <!-- Default Hidden Values -->
+          <input type="hidden" id="defaultNarrativePerson" value="third">
+          <input type="hidden" id="defaultTimePeriod" value="ancient">
+          <input type="hidden" id="defaultLanguageComplexity" value="simple">
+          <input type="hidden" id="defaultStoryLength" value="medium">
+          
+          <div class="form-group">
+            <label for="narrativePerson">Narrative Perspective</label>
+            <select id="narrativePerson">
+              <option value="first">First Person</option>
+              <option value="third">Third Person</option>
+              <option value="omniscient">Omniscient</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="timePeriod">Time Period Style</label>
+            <select id="timePeriod">
+              <option value="ancient">Ancient Era</option>
+              <option value="medieval">Medieval Period</option>
+              <option value="modern">Modern Adaptation</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="languageComplexity">Language Style</label>
+            <select id="languageComplexity">
+              <option value="simple">Simple</option>
+              <option value="moderate">Moderate</option>
+              <option value="complex">Complex</option>
+              <option value="poetic">Poetic</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="emotionalTone">Emotional Tone</label>
+            <select id="emotionalTone">
+              <option value="inspiring">Inspiring</option>
+              <option value="dramatic">Dramatic</option>
+              <option value="contemplative">Contemplative</option>
+              <option value="mysterious">Mysterious</option>
+              <option value="intense">Intense</option>
+              <option value="serene">Serene</option>
+              <option value="mystical">Mystical</option>
+              <option value="heroic">Heroic</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="narrativeStyle">Narrative Style</label>
+            <select id="narrativeStyle">
+              <option value="descriptive">Rich Description</option>
+              <option value="action">Action-Focused</option>
+              <option value="dialogue">Dialogue-Heavy</option>
+              <option value="poetic">Poetic</option>
+              <option value="balanced">Balanced</option>
+              <option value="philosophical">Philosophical</option>
+              <option value="symbolic">Symbolic</option>
+              <option value="mythological">Traditional Mythological</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="plotComplexity">Plot Structure</label>
+            <select id="plotComplexity">
+              <option value="linear">Linear Journey</option>
+              <option value="branching">Multiple Subplots</option>
+              <option value="layered">Layered Meanings</option>
+              <option value="cyclical">Cyclical Pattern</option>
+              <option value="episodic">Episodic Tales</option>
+              <option value="nested">Nested Stories</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="storyLength">Story Length</label>
+            <select id="storyLength">
+              <option value="brief">Brief Tale</option>
+              <option value="medium" selected>Medium Length</option>
+              <option value="extended">Extended Narrative</option>
+              <option value="epic">Epic Length</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="button-group">
+          <button type="submit" class="primary-button">
+            <i class="fas fa-magic"></i> Generate Story
+          </button>
+          <button type="button" class="secondary-button" id="randomize">
+            <i class="fas fa-random"></i> Random Story
+          </button>
+        </div>
+      </form>
+
+      <!-- Story Output Section -->
+      <div class="story-output" style="display: none;">
+        <div class="story-header">
+          <h2 class="story-title"></h2>
+          <div class="story-actions">
+            <button id="copyStory" class="action-button">
+              <i class="fas fa-copy"></i> Copy
+            </button>
+            <button id="downloadStory" class="action-button">
+              <i class="fas fa-download"></i> Download
+            </button>
+          </div>
+        </div>
+        <div class="story-container">
+          <div class="story-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Animation -->
+    <div class="loading-container" id="loadingContainer">
+      <div class="loading-animation">
+        <div class="geometric-loader">
+          <div class="hexagon-group">
+            <div class="hexagon hex1"></div>
+            <div class="hexagon hex2"></div>
+            <div class="hexagon hex3"></div>
+            <div class="hexagon hex4"></div>
+            <div class="hexagon hex5"></div>
+            <div class="hexagon hex6"></div>
+          </div>
+        </div>
+        <div id="loadingMessages" class="loading-messages"></div>
+      </div>
+    </div>
+
+    <!-- Load scripts in correct order -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      // Initialize particles.js
+      particlesJS('particles-js', {
+        particles: {
+          number: {
+            value: 80,
+            density: {
+              enable: true,
+              value_area: 800
+            }
+          },
+          color: {
+            value: "#ffffff"
+          },
+          shape: {
+            type: "circle"
+          },
+          opacity: {
+            value: 0.5,
+            random: true,
+            animation: {
+              enable: true,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false
+            }
+          },
+          size: {
+            value: 3,
+            random: true,
+            animation: {
+              enable: true,
+              speed: 2,
+              size_min: 0.1,
+              sync: false
+            }
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: true,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: {
+              enable: true,
+              mode: "bubble"
+            },
+            onclick: {
+              enable: true,
+              mode: "push"
+            },
+            resize: true
+          },
+          modes: {
+            bubble: {
+              distance: 200,
+              size: 6,
+              duration: 2,
+              opacity: 0.8,
+              speed: 3
+            },
+            push: {
+              particles_nb: 4
+            }
+          }
+        },
+        retina_detect: true
+      });
+
+      // Enhanced loading animation styles
+      const style = document.createElement('style');
+      style.textContent = `
+        .loading-container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.9);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loading-container.visible {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .loading-animation {
+          position: relative;
+          width: 300px;
+          height: 300px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        }
+
+        .geometric-loader {
+          position: relative;
+          width: 200px;
+          height: 200px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 40px;
+        }
+
+        .hexagon-group {
+          position: relative;
+          width: 100px;
+          height: 100px;
+          transform-style: preserve-3d;
+          animation: rotateGroup 8s linear infinite;
+        }
+
+        .hexagon {
+          position: absolute;
+          width: 40px;
+          height: 44px;
+          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+          background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+          transform-origin: center;
+          animation: pulseAndGlow 2s ease-in-out infinite;
+          box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+        }
+
+        .hex1 { transform: translate(30px, -52px); animation-delay: 0s; }
+        .hex2 { transform: translate(60px, 0px); animation-delay: 0.3s; }
+        .hex3 { transform: translate(30px, 52px); animation-delay: 0.6s; }
+        .hex4 { transform: translate(-30px, 52px); animation-delay: 0.9s; }
+        .hex5 { transform: translate(-60px, 0px); animation-delay: 1.2s; }
+        .hex6 { transform: translate(-30px, -52px); animation-delay: 1.5s; }
+
+        @keyframes rotateGroup {
+          0% { transform: perspective(1500px) rotateY(0deg) rotateX(20deg); }
+          100% { transform: perspective(1500px) rotateY(360deg) rotateX(20deg); }
+        }
+
+        @keyframes pulseAndGlow {
+          0%, 100% {
+            transform: scale(1) translateZ(0);
+            filter: brightness(1);
+          }
+          50% {
+            transform: scale(1.1) translateZ(20px);
+            filter: brightness(1.3);
+          }
+        }
+
+        .loading-message {
+          position: absolute;
+          top: calc(50% + 80px);
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 1.2rem;
+          color: #fff;
+          text-align: center;
+          opacity: 0;
+          transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          background: linear-gradient(45deg, var(--primary-color), #ff6b6b);
+          padding: 15px 25px;
+          border-radius: 15px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          white-space: nowrap;
+          backdrop-filter: blur(5px);
+        }
+
+        .loading-message.visible {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+
+        .loading-message::before {
+          content: '';
+          position: absolute;
+          inset: -3px;
+          background: linear-gradient(45deg, var(--primary-color), #ff6b6b, var(--primary-color));
+          border-radius: 17px;
+          z-index: -1;
+          filter: blur(12px);
+          opacity: 0.8;
+        }
+
+        @keyframes borderGlow {
+          0%, 100% {
+            opacity: 0.5;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.02);
+          }
+        }
+
+        /* Story paragraph animations remain the same */
+        .story-paragraph {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                      transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+          padding: 20px;
+          margin: 15px 0;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 10px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          border-left: 4px solid var(--primary-color);
+        }
+
+        .story-paragraph.reveal {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .story-paragraph:hover {
+          background: rgba(255, 255, 255, 0.08);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+          transition: all 0.3s ease;
+        }
+      `;
+      document.head.appendChild(style);
+    </script>
+    <script src="assets/js/story-constants.js"></script>
+    <script src="assets/js/ollama-client.js"></script>
+    <script src="assets/js/story-generator.js"></script>
+    <script>
+      // Global error handler
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        console.error('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + lineNo + '\nColumn: ' + columnNo + '\nError object: ' + JSON.stringify(error));
+        return false;
+      };
+    </script>
+  </body>
+</html>

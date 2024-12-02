@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - ITHIHAS</title>
+    <link rel="icon" type="image/x-icon" href="./Logo/Logo.jpg" />
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .register-container {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('assets/images/Ayodhya.jpeg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .register-box {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 8px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .register-header h1 {
+            color: #fff;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--primary-color), #ff4b2b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .register-header p {
+            color: #b3b3b3;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .form-control {
+            background: #333;
+            border-radius: 4px;
+            border: 1px solid #454545;
+            color: #fff;
+            height: 50px;
+            padding: 16px 20px 0;
+            width: 100%;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: #454545;
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            color: #8c8c8c;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        .form-control:focus + .form-label,
+        .form-control:not(:placeholder-shown) + .form-label {
+            top: 8px;
+            transform: translateY(0);
+            font-size: 12px;
+            color: #b3b3b3;
+        }
+
+        .password-strength {
+            margin-top: 8px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .password-strength i {
+            font-size: 14px;
+        }
+
+        .password-requirements {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #8c8c8c;
+            padding-left: 20px;
+        }
+
+        .password-requirements ul {
+            list-style: none;
+            padding: 0;
+            margin: 5px 0 0;
+        }
+
+        .password-requirements li {
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .password-requirements li i {
+            font-size: 12px;
+        }
+
+        .requirement-met {
+            color: #28a745;
+        }
+
+        .requirement-unmet {
+            color: #8c8c8c;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), #ff4b2b);
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 24px 0 16px;
+            padding: 16px;
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .form-footer {
+            text-align: center;
+            color: #b3b3b3;
+            font-size: 15px;
+            margin-top: 20px;
+        }
+
+        .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .form-footer a:hover {
+            color: #ff4b2b;
+        }
+
+        .error-message {
+            color: var(--primary-color);
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .error-message::before {
+            content: '!';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+            padding-left: 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        .success-message::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .register-box {
+                padding: 30px 20px;
+            }
+
+            .register-header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-box">
+            <div class="register-header">
+                <h1>Create Account</h1>
+                <p>Join ITHIHAS to explore the timeless wisdom of Indian epics</p>
+            </div>
+            <form id="registerForm" class="register-form">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" class="form-control" placeholder=" " required>
+                    <label for="name" class="form-label">Full Name</label>
+                    <div class="error-message" id="nameError"></div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" class="form-control" placeholder=" " required>
+                    <label for="email" class="form-label">Email</label>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" class="form-control" placeholder=" " required>
+                    <label for="password" class="form-label">Password</label>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+                <div class="success-message" id="successMessage"></div>
+                <button type="submit" class="btn-primary" id="submitButton">
+                    Create Account
+                </button>
+                <div class="form-footer">
+                    <p>Already have an account? <a href="login.html">Sign In</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            const auth = new Auth();
+            
+            function showError(elementId, message) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+
+            function clearErrors() {
+                const errorElements = document.querySelectorAll('.error-message');
+                errorElements.forEach(element => {
+                    element.textContent = '';
+                    element.style.display = 'none';
+                });
+            }
+
+            // If user is already logged in, redirect to index
+            if (auth.isLoggedIn()) {
+                window.location.href = 'index.html';
+            }
+            
+            document.getElementById('registerForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                clearErrors();
+                
+                const formData = {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    password: document.getElementById('password').value
+                };
+
+                // Basic validation
+                if (!formData.name || !formData.email || !formData.password) {
+                    if (!formData.name) showError('nameError', 'Name is required');
+                    if (!formData.email) showError('emailError', 'Email is required');
+                    if (!formData.password) showError('passwordError', 'Password is required');
+                    return;
+                }
+
+                const submitButton = document.getElementById('submitButton');
+                const successMessage = document.getElementById('successMessage');
+
+                try {
+                    // Disable button and show loading state
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Creating Account...';
+                    
+                    // Register user
+                    auth.register(formData);
+                    
+                    // Show success message
+                    successMessage.textContent = 'Account created successfully! Redirecting to login...';
+                    successMessage.style.display = 'block';
+                    
+                    // Clear form
+                    document.getElementById('registerForm').reset();
+                    
+                    // Force redirect after delay
+                    setTimeout(() => {
+                        document.location = 'login.html';
+                    }, 1500);
+                    
+                } catch (error) {
+                    // Reset button state
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Create Account';
+                    
+                    // Handle specific errors
+                    if (error.message.includes('email')) {
+                        showError('emailError', error.message);
+                    } else if (error.message.includes('password')) {
+                        showError('passwordError', error.message);
+                    } else {
+                        showError('emailError', error.message);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

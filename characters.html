@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Characters - ITHIHAS</title>
+    <link rel="icon" type="image/x-icon" href="./Logo/Logo.jpg" />
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #E50914;
+            --background-dark: #141414;
+            --background-light: #2F2F2F;
+            --text-color: #FFFFFF;
+            --gradient-overlay: linear-gradient(to top, rgba(20, 20, 20, 0.9), rgba(20, 20, 20, 0.6));
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --transition-speed: 0.3s;
+            --animation-curve: cubic-bezier(0.4, 0, 0.2, 1);
+            --card-bg: #2F2F2F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Netflix Sans', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav.scrolled {
+            background-color: var(--background-dark);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-content {
+            padding: 100px 50px 50px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .epic-section {
+            margin: var(--spacing-xl) 0;
+        }
+
+        .epic-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            background: linear-gradient(45deg, var(--primary-color), #ff4b2b);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            padding: var(--spacing-lg);
+        }
+
+        .character-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform var(--transition-speed) var(--animation-curve);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .character-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform var(--transition-speed) var(--animation-curve);
+        }
+
+        .character-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .character-content {
+            padding: var(--spacing-md);
+        }
+
+        .character-title {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-color);
+        }
+
+        .character-role {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .character-description {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .section-nav {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+            flex-wrap: wrap;
+        }
+
+        .section-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 4px;
+            background: var(--card-bg);
+            transition: all var(--transition-speed) var(--animation-curve);
+        }
+
+        .section-nav a:hover {
+            background: var(--primary-color);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            text-decoration: none;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="/" class="logo">
+                <img src="./Logo/Logo.jpg" alt="ITHIHAS Logo" />
+                <span>ITHIHAS</span>
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="library.html">Library</a>
+            <a href="characters.html" class="active">Featured Characters</a>
+            <a href="teachings.html">Teachings</a>
+            <a href="FAQ.html">FAQ</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1 class="section-title">Epic Characters</h1>
+        
+        <section class="section-nav">
+            <a href="#ramayana">Ramayana Characters</a>
+            <a href="#mahabharata">Mahabharata Characters</a>
+            <a href="#bhagavad-gita">Bhagavad Gita Characters</a>
+        </section>
+
+        <section id="ramayana" class="epic-section">
+            <h2 class="epic-title">Ramayana Characters</h2>
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/Rama.jpeg" alt="Lord Rama">
+                    <div class="character-content">
+                        <h3 class="character-title">Lord Rama</h3>
+                        <p class="character-role">The Divine Prince of Ayodhya</p>
+                        <p class="character-description">The seventh avatar of Lord Vishnu, embodiment of dharma.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/sita.jpeg" alt="Sita">
+                    <div class="character-content">
+                        <h3 class="character-title">Sita</h3>
+                        <p class="character-role">Princess of Mithila</p>
+                        <p class="character-description">Daughter of Earth, epitome of devotion and strength.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/hanuman.jpeg" alt="Hanuman">
+                    <div class="character-content">
+                        <h3 class="character-title">Hanuman</h3>
+                        <p class="character-role">The Divine Vanara</p>
+                        <p class="character-description">The mighty devotee, symbol of strength and devotion.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/lakshamana.jpeg" alt="Lakshmana">
+                    <div class="character-content">
+                        <h3 class="character-title">Lakshmana</h3>
+                        <p class="character-role">Prince of Ayodhya</p>
+                        <p class="character-description">Rama's devoted brother, embodiment of service.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/ravan.jpeg" alt="Ravana">
+                    <div class="character-content">
+                        <h3 class="character-title">Ravana</h3>
+                        <p class="character-role">King of Lanka</p>
+                        <p class="character-description">The powerful demon king and great scholar.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/baratha.jpeg" alt="Bharata">
+                    <div class="character-content">
+                        <h3 class="character-title">Bharata</h3>
+                        <p class="character-role">Prince of Ayodhya</p>
+                        <p class="character-description">Righteous prince who ruled as Rama's representative.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/dhasharatha.jpeg" alt="Dasharatha">
+                    <div class="character-content">
+                        <h3 class="character-title">Dasharatha</h3>
+                        <p class="character-role">King of Ayodhya</p>
+                        <p class="character-description">Father of Rama, bound by his promise.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/kikeyi.jpeg" alt="Kaikeyi">
+                    <div class="character-content">
+                        <h3 class="character-title">Kaikeyi</h3>
+                        <p class="character-role">Queen of Ayodhya</p>
+                        <p class="character-description">Bharata's mother who asked for Rama's exile.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/sugriva.jpeg" alt="Sugriva">
+                    <div class="character-content">
+                        <h3 class="character-title">Sugriva</h3>
+                        <p class="character-role">King of Vanaras</p>
+                        <p class="character-description">Monkey king who helped in finding Sita.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/jatayu.jpeg" alt="Jatayu">
+                    <div class="character-content">
+                        <h3 class="character-title">Jatayu</h3>
+                        <p class="character-role">The Divine Vulture</p>
+                        <p class="character-description">Noble bird who sacrificed his life for Sita.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/vibhishana.jpeg" alt="Vibhishana">
+                    <div class="character-content">
+                        <h3 class="character-title">Vibhishana</h3>
+                        <p class="character-role">Brother of Ravana</p>
+                        <p class="character-description">Righteous brother who chose dharma.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Ramayan characters/Maricha.jpeg" alt="Maricha">
+                    <div class="character-content">
+                        <h3 class="character-title">Maricha</h3>
+                        <p class="character-role">Demon Ally of Ravana</p>
+                        <p class="character-description">The demon who became the golden deer.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mahabharata" class="epic-section">
+            <h2 class="epic-title">Mahabharata Characters</h2>
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="assets/images/Mahabaratha characters/krishna.jpeg" alt="Lord Krishna">
+                    <div class="character-content">
+                        <h3 class="character-title">Lord Krishna</h3>
+                        <p class="character-role">The Divine Guide</p>
+                        <p class="character-description">The eighth avatar of Vishnu, guide and protector of the Pandavas.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Mahabaratha characters/arjuna.jpeg" alt="Arjuna">
+                    <div class="character-content">
+                        <h3 class="character-title">Arjuna</h3>
+                        <p class="character-role">The Third Pandava</p>
+                        <p class="character-description">The greatest archer, recipient of the Bhagavad Gita.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Mahabaratha characters/yudhistra.jpeg" alt="Yudhishthira">
+                    <div class="character-content">
+                        <h3 class="character-title">Yudhishthira</h3>
+                        <p class="character-role">The Eldest Pandava</p>
+                        <p class="character-description">Known as Dharmaraja, embodiment of righteousness.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Mahabaratha characters/bhima.jpeg" alt="Bhima">
+                    <div class="character-content">
+                        <h3 class="character-title">Bhima</h3>
+                        <p class="character-role">The Second Pandava</p>
+                        <p class="character-description">The mighty warrior known for his strength.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Mahabaratha characters/draupadi.jpeg" alt="Draupadi">
+                    <div class="character-content">
+                        <h3 class="character-title">Draupadi</h3>
+                        <p class="character-role">Wife of the Pandavas</p>
+                        <p class="character-description">Born from fire, symbol of strength and dignity.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Mahabaratha characters/karna.jpeg" alt="Karna">
+                    <div class="character-content">
+                        <h3 class="character-title">Karna</h3>
+                        <p class="character-role">The Tragic Hero</p>
+                        <p class="character-description">The unsung hero, loyal friend of Duryodhana.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Mahabaratha characters/bhishma.jpeg" alt="Bhishma">
+                    <div class="character-content">
+                        <h3 class="character-title">Bhishma</h3>
+                        <p class="character-role">The Grand Patriarch</p>
+                        <p class="character-description">The great grandsire of the Kuru dynasty.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Mahabaratha characters/dhuryodhana.jpeg" alt="Duryodhana">
+                    <div class="character-content">
+                        <h3 class="character-title">Duryodhana</h3>
+                        <p class="character-role">Leader of the Kauravas</p>
+                        <p class="character-description">The eldest of the hundred Kauravas.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Mahabaratha characters/dronacharya.jpeg" alt="Dronacharya">
+                    <div class="character-content">
+                        <h3 class="character-title">Dronacharya</h3>
+                        <p class="character-role">The Master Teacher</p>
+                        <p class="character-description">The greatest teacher of warfare.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bhagavad-gita" class="epic-section">
+            <h2 class="epic-title">Bhagavad Gita Characters</h2>
+            <div class="character-grid">
+                <div class="character-card">
+                    <img src="assets/images/Bhagavath gita characters/krishna.jpeg" alt="Lord Krishna">
+                    <div class="character-content">
+                        <h3 class="character-title">Lord Krishna</h3>
+                        <p class="character-role">The Supreme Teacher</p>
+                        <p class="character-description">The divine charioteer who reveals the eternal wisdom of the Bhagavad Gita to Arjuna.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Bhagavath gita characters/arjuna.jpeg" alt="Arjuna">
+                    <div class="character-content">
+                        <h3 class="character-title">Arjuna</h3>
+                        <p class="character-role">The Seeker of Truth</p>
+                        <p class="character-description">The mighty warrior who receives divine knowledge through his dialogue with Lord Krishna.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Bhagavath gita characters/Sanjaya.jpeg" alt="Sanjaya">
+                    <div class="character-content">
+                        <h3 class="character-title">Sanjaya</h3>
+                        <p class="character-role">The Divine Narrator</p>
+                        <p class="character-description">Blessed with divine vision to narrate the events of Kurukshetra to King Dhritarashtra.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Bhagavath gita characters/Dhritarashtra.jpeg" alt="Dhritarashtra">
+                    <div class="character-content">
+                        <h3 class="character-title">Dhritarashtra</h3>
+                        <p class="character-role">The Blind King</p>
+                        <p class="character-description">The blind king who listens to Sanjaya's narration of the Bhagavad Gita.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Bhagavath gita characters/Bhishma.jpeg" alt="Bhishma">
+                    <div class="character-content">
+                        <h3 class="character-title">Bhishma</h3>
+                        <p class="character-role">The Grand Patriarch</p>
+                        <p class="character-description">The revered elder who witnesses the divine dialogue while leading the Kaurava army.</p>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <img src="assets/images/Bhagavath gita characters/dhronacharya.jpeg" alt="Dronacharya">
+                    <div class="character-content">
+                        <h3 class="character-title">Dronacharya</h3>
+                        <p class="character-role">The Master Teacher</p>
+                        <p class="character-description">The legendary guru who trained both the Pandavas and Kauravas in warfare.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="Practice.js"></script>
+</body>
+</html>

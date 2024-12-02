@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bhagavad Gita Characters - ITHIHAS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #e50914;
+        --secondary-color: #564d4d;
+        --text-color: #ffffff;
+        --background-dark: #141414;
+        --background-light: #2f2f2f;
+        --overlay-color: rgba(0, 0, 0, 0.7);
+        --gradient-overlay: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.9) 0%,
+          rgba(0, 0, 0, 0.4) 100%
+        );
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+      }
+
+      body {
+        background-color: var(--background-dark);
+        color: var(--text-color);
+      }
+
+      /* Navigation */
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.7) 0%,
+          transparent 100%
+        );
+        z-index: 1000;
+        transition: background-color 0.3s;
+      }
+
+      .navbar.scrolled {
+        background-color: var(--background-dark);
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary-color);
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 60vh;
+        background: url("assets/images/Bhagavath\ gita\ characters/Krishna.jpeg")
+          center/cover no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 0 50px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--gradient-overlay);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      /* Characters Grid */
+      .characters-container {
+        padding: 50px;
+        margin-top: -100px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .character-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      .character-card {
+        background: var(--background-light);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        height: 100%;
+      }
+
+      .character-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .character-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .character-content {
+        padding: 20px;
+      }
+
+      .character-title {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: var(--primary-color);
+      }
+
+      .character-role {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        opacity: 0.8;
+      }
+
+      .character-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        opacity: 0.7;
+        margin-bottom: 15px;
+      }
+
+      .key-aspect {
+        font-size: 0.9rem;
+        padding: 15px;
+        background: rgba(229, 9, 20, 0.1);
+        border-left: 3px solid var(--primary-color);
+        border-radius: 0 4px 4px 0;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 15px 20px;
+        }
+
+        .hero {
+          height: 50vh;
+          padding: 0 20px;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .characters-container {
+          padding: 20px;
+        }
+
+        .character-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="index.html" class="logo">ITHIHAS</a>
+      <div class="nav-links">
+        <a href="index.html#epics">Epics</a>
+        <a href="ramayana_characters.html">Ramayana Characters</a>
+        <a href="mahabharata_characters.html">Mahabharata Characters</a>
+        <a href="teachings.html">Sacred Teachings</a>
+        <a href="index.html#stories">Stories</a>
+        <a href="story-generator.html#generator">Create</a>
+        <a href="index.html"><i class="fas fa-user"></i></a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Bhagavad Gita Characters</h1>
+        <p>
+          Explore the divine personalities and warriors who shaped the eternal
+          dialogue of the Bhagavad Gita.
+        </p>
+      </div>
+    </section>
+
+    <section class="characters-container">
+      <div class="character-grid">
+        <!-- Lord Krishna -->
+        <div id="krishna" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/krishna.jpeg"
+            alt="Lord Krishna"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Lord Krishna</h3>
+            <p class="character-role">The Divine Charioteer</p>
+            <p class="character-description">
+              The Supreme Being (Avatar of Vishnu) and mentor to Arjuna. Krishna
+              imparts the teachings of the Bhagavad Gita, representing ultimate
+              knowledge, wisdom, and the path to liberation.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Krishna's teachings cover Dharma,
+              Karma, Bhakti, and Jnana (duty, action, devotion, and wisdom).
+            </div>
+          </div>
+        </div>
+
+        <!-- Arjuna -->
+        <div id="arjuna" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/arjuna.jpeg"
+            alt="Arjuna"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Arjuna</h3>
+            <p class="character-role">The Seeker of Truth</p>
+            <p class="character-description">
+              A warrior prince and Pandava hero who seeks Krishna's guidance
+              when faced with moral dilemma before the Kurukshetra war.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Arjuna symbolizes the human condition
+              of doubt, moral conflict, and the struggle between right and
+              wrong.
+            </div>
+          </div>
+        </div>
+
+        <!-- Bhishma -->
+        <div id="bhishma" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/Bhishma.jpeg"
+            alt="Bhishma"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Bhishma</h3>
+            <p class="character-role">The Grand Patriarch</p>
+            <p class="character-description">
+              The granduncle of both Pandavas and Kauravas, renowned for his vow
+              of celibacy and unwavering loyalty to the throne of Hastinapur.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Bhishma represents the principles of
+              duty (Dharma) and sacrifice, raising important moral questions
+              about loyalty and righteousness.
+            </div>
+          </div>
+        </div>
+
+        <!-- Dronacharya -->
+        <div id="dronacharya" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/dhronacharya.jpeg"
+            alt="Dronacharya"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Dronacharya</h3>
+            <p class="character-role">The Master Teacher</p>
+            <p class="character-description">
+              The martial instructor to both Kauravas and Pandavas, bound by his
+              duty to teach and his loyalty to the throne.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Dronacharya symbolizes the duty of a
+              teacher and the complexities of loyalty in conflict.
+            </div>
+          </div>
+        </div>
+
+        <!-- Karna -->
+        <div id="karna" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/karna.jpeg"
+            alt="Karna"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Karna</h3>
+            <p class="character-role">The Tragic Hero</p>
+            <p class="character-description">
+              A warrior of unparalleled generosity and skill, loyal to
+              Duryodhana despite his hidden royal lineage as the firstborn of
+              Kunti.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Karna represents the struggles of
+              fate, honor, and loyalty, as well as the conflict between duty and
+              personal desire.
+            </div>
+          </div>
+        </div>
+
+        <!-- Yudhishthira -->
+        <div id="yudhishthira" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/yudhistra.jpeg"
+            alt="Yudhishthira"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Yudhishthira</h3>
+            <p class="character-role">The Righteous King</p>
+            <p class="character-description">
+              The eldest Pandava brother and future king of Hastinapur, known
+              for his unwavering commitment to truth and justice.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Yudhishthira symbolizes Dharma,
+              representing the virtues of honesty, integrity, and
+              responsibility.
+            </div>
+          </div>
+        </div>
+
+        <!-- Bhima -->
+        <div id="bhima" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/bhima.jpeg"
+            alt="Bhima"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Bhima</h3>
+            <p class="character-role">The Mighty Warrior</p>
+            <p class="character-description">
+              The second of the Pandava brothers, known for his immense physical
+              strength and unwavering loyalty to his family.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Bhima represents physical prowess,
+              determination, and the protection of righteousness through
+              strength.
+            </div>
+          </div>
+        </div>
+
+        <!-- Nakula and Sahadeva -->
+        <div id="nakula-sahadeva" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/nakula and sahadeva.jpeg"
+            alt="Nakula and Sahadeva"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Nakula and Sahadeva</h3>
+            <p class="character-role">The Divine Twins</p>
+            <p class="character-description">
+              The youngest of the Pandava brothers, born to Madri. Nakula was
+              known for his beauty and equestrian skills, while Sahadeva was
+              known for his wisdom and knowledge of astronomy.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> They represent the perfect balance of
+              physical beauty and intellectual wisdom.
+            </div>
+          </div>
+        </div>
+
+        <!-- Draupadi -->
+        <div id="draupadi" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/draupadi.jpeg"
+            alt="Draupadi"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Draupadi</h3>
+            <p class="character-role">The Fire-Born Queen</p>
+            <p class="character-description">
+              Wife to all five Pandava brothers, born from a sacrificial fire.
+              She is a symbol of feminine strength and dignity, despite the
+              hardships she endured.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Draupadi represents dignity,
+              resilience, and the fight for justice in the face of adversity.
+            </div>
+          </div>
+        </div>
+
+        <!-- Duryodhana -->
+        <div id="duryodhana" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/dhuryodhana.jpeg"
+            alt="Duryodhana"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Duryodhana</h3>
+            <p class="character-role">The Ambitious Prince</p>
+            <p class="character-description">
+              The eldest of the Kauravas and the primary antagonist. His
+              jealousy and ambition for the throne of Hastinapur led to the
+              great war.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Duryodhana represents the corrupting
+              nature of power, jealousy, and uncontrolled ambition.
+            </div>
+          </div>
+        </div>
+
+        <!-- Dhritarashtra -->
+        <div id="dhritarashtra" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/Dhritarashtra.jpeg"
+            alt="Dhritarashtra"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Dhritarashtra</h3>
+            <p class="character-role">The Blind King</p>
+            <p class="character-description">
+              The blind king of Hastinapur and father of the Kauravas. His
+              physical blindness mirrors his emotional blindness to his son's
+              misdeeds.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Dhritarashtra represents the
+              blindness of attachment and the consequences of partial judgment.
+            </div>
+          </div>
+        </div>
+
+        <!-- Gandhari -->
+        <div id="gandhari" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/gandhari.jpeg"
+            alt="Gandhari"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Gandhari</h3>
+            <p class="character-role">The Self-Blinded Queen</p>
+            <p class="character-description">
+              Wife of Dhritarashtra who chose to blindfold herself to share her
+              husband's experience. Mother of the Kauravas.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Gandhari represents devotion,
+              sacrifice, and the consequences of unconditional maternal love.
+            </div>
+          </div>
+        </div>
+
+        <!-- Shakuni -->
+        <div id="shakuni" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/shakuni.jpeg"
+            alt="Shakuni"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Shakuni</h3>
+            <p class="character-role">The Master Manipulator</p>
+            <p class="character-description">
+              Maternal uncle of Duryodhana and a master of dice. His cunning and
+              manipulation played a crucial role in instigating the war.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Shakuni represents deception,
+              manipulation, and the destructive power of revenge.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sanjaya -->
+        <div id="sanjaya" class="character-card">
+          <img
+            src="assets/images/Bhagavath gita characters/Sanjaya.jpeg"
+            alt="Sanjaya"
+            class="character-image"
+          />
+          <div class="character-content">
+            <h3 class="character-title">Sanjaya</h3>
+            <p class="character-role">The Divine Narrator</p>
+            <p class="character-description">
+              Charioteer and advisor to King Dhritarashtra, blessed with divine
+              sight to narrate the events of the Kurukshetra war.
+            </p>
+            <div class="key-aspect">
+              <strong>Key Aspect:</strong> Sanjaya represents divine wisdom and
+              the importance of truthful narration of events.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Navbar scroll effect
+      window.addEventListener("scroll", () => {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+    </script>
+  </body>
+</html>

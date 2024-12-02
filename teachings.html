@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sacred Teachings - ITHIHAS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #e50914;
+        --background-dark: #141414;
+        --background-light: #2f2f2f;
+        --text-color: #ffffff;
+        --gradient-overlay: linear-gradient(
+          to top,
+          rgba(20, 20, 20, 0.9),
+          rgba(20, 20, 20, 0.6)
+        );
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Netflix Sans", "Helvetica Neue", Arial, sans-serif;
+        background-color: var(--background-dark);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+        z-index: 1000;
+        transition: background-color 0.3s;
+      }
+
+      nav.scrolled {
+        background-color: var(--background-dark);
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary-color);
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 60vh;
+        background: url("assets/images/teachings/teachings-hero.jpeg")
+          center/cover no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 0 50px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--gradient-overlay);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+      }
+
+      .hero-description {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+
+      /* Teachings Grid */
+      .teachings-container {
+        padding: 50px;
+      }
+
+      .teachings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      .teaching-card {
+        background: var(--background-light);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s;
+      }
+
+      .teaching-card:hover {
+        transform: scale(1.05);
+      }
+
+      .teaching-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .teaching-content {
+        padding: 20px;
+      }
+
+      .teaching-title {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: var(--text-color);
+      }
+
+      .teaching-source {
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+
+      .teaching-description {
+        color: var(--text-color);
+        opacity: 0.8;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="practice.html" class="logo">ITHIHAS</a>
+      <div class="nav-links">
+        <a href="practice.html">Home</a>
+        <a href="ramayana.html">Ramayana</a>
+        <a href="mahabharath.html">Mahabharata</a>
+        <a href="./bhagavadgita.html">Bhagavad Gita</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Sacred Teachings</h1>
+        <p class="hero-description">
+          Explore the timeless wisdom and profound teachings from ancient Indian
+          scriptures that continue to guide humanity.
+        </p>
+      </div>
+    </section>
+
+    <section class="teachings-container">
+      <div class="teachings-grid">
+        <!-- Dharma -->
+        <div class="teaching-card">
+          <img
+            src="assets/images/teachings/Dharma.jpeg"
+            alt="Dharma"
+            class="teaching-image"
+          />
+          <div class="teaching-content">
+            <h3 class="teaching-title">Dharma</h3>
+            <p class="teaching-source">Universal Teaching</p>
+            <p class="teaching-description">
+              The eternal law of righteousness, duty, and moral order that
+              sustains the cosmos and human society.
+            </p>
+          </div>
+        </div>
+
+        <!-- Karma -->
+        <div class="teaching-card">
+          <img
+            src="assets/images/teachings/karma.jpeg"
+            alt="Karma"
+            class="teaching-image"
+          />
+          <div class="teaching-content">
+            <h3 class="teaching-title">Karma</h3>
+            <p class="teaching-source">Universal Law</p>
+            <p class="teaching-description">
+              The law of cause and effect, teaching that our actions have
+              consequences that shape our future.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bhakti -->
+        <div class="teaching-card">
+          <img
+            src="assets/images/teachings/Bhakthi.jpeg"
+            alt="Bhakti"
+            class="teaching-image"
+          />
+          <div class="teaching-content">
+            <h3 class="teaching-title">Bhakti</h3>
+            <p class="teaching-source">Path of Devotion</p>
+            <p class="teaching-description">
+              The path of loving devotion to the Divine, emphasizing surrender
+              and pure love.
+            </p>
+          </div>
+        </div>
+
+        <!-- Duty -->
+        <div class="teaching-card">
+          <img
+            src="assets/images/teachings/duty.jpeg"
+            alt="Duty"
+            class="teaching-image"
+          />
+          <div class="teaching-content">
+            <h3 class="teaching-title">Duty</h3>
+            <p class="teaching-source">From Bhagavad Gita</p>
+            <p class="teaching-description">
+              The importance of performing one's duties without attachment to
+              results.
+            </p>
+          </div>
+        </div>
+
+        <!-- Truth -->
+        <div class="teaching-card">
+          <img
+            src="assets/images/teachings/truth.jpeg"
+            alt="Truth"
+            class="teaching-image"
+          />
+          <div class="teaching-content">
+            <h3 class="teaching-title">Truth</h3>
+            <p class="teaching-source">From Ramayana</p>
+            <p class="teaching-description">
+              The power of truth and its importance in maintaining dharma and
+              righteousness.
+            </p>
+          </div>
+        </div>
+
+        <!-- Righteousness -->
+        <div class="teaching-card">
+          <img
+            src="assets/images/teachings/Righteousness.jpeg"
+            alt="Righteousness"
+            class="teaching-image"
+          />
+          <div class="teaching-content">
+            <h3 class="teaching-title">Righteousness</h3>
+            <p class="teaching-source">From Mahabharata</p>
+            <p class="teaching-description">
+              The importance of choosing the right path even in difficult
+              circumstances.
+            </p>
+          </div>
+        </div>
+
+        <!-- Detachment -->
+        <div class="teaching-card">
+          <img
+            src="assets/images/teachings/ditachements.jpeg"
+            alt="Detachment"
+            class="teaching-image"
+          />
+          <div class="teaching-content">
+            <h3 class="teaching-title">Detachment</h3>
+            <p class="teaching-source">From Bhagavad Gita</p>
+            <p class="teaching-description">
+              The practice of performing actions without attachment to their
+              fruits.
+            </p>
+          </div>
+        </div>
+
+        <!-- Service -->
+        <div class="teaching-card">
+          <img
+            src="assets/images/teachings/service.jpeg"
+            alt="Service"
+            class="teaching-image"
+          />
+          <div class="teaching-content">
+            <h3 class="teaching-title">Service</h3>
+            <p class="teaching-source">Universal Teaching</p>
+            <p class="teaching-description">
+              The importance of selfless service and its role in spiritual
+              growth.
+            </p>
+          </div>
+        </div>
+
+        <!-- Wisdom -->
+        <div class="teaching-card">
+          <img
+            src="assets/images/teachings/wisdom.jpeg"
+            alt="Wisdom"
+            class="teaching-image"
+          />
+          <div class="teaching-content">
+            <h3 class="teaching-title">Wisdom</h3>
+            <p class="teaching-source">From All Scriptures</p>
+            <p class="teaching-description">
+              The pursuit of true knowledge and understanding of the self and
+              reality.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Navigation background change on scroll
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 50) {
+          nav.classList.add("scrolled");
+        } else {
+          nav.classList.remove("scrolled");
+        }
+      });
+    </script>
+  </body>
+</html>

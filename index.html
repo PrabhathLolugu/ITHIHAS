@@ -1,0 +1,2609 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore the timeless wisdom of Indian epics through our modern digital platform" />
+    <link rel="icon" type="image/x-icon" href="./Logo/Logo.jpg" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#141414" />
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <title>ITHIHAS - Indian Traditional Heritage Interactive Audio Stories</title>
+    <style>
+        :root[data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #141414;
+            --primary-color: #e50914;
+            --secondary-color: #f5f5f5;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --modal-bg: #ffffff;
+            --border-color: #e5e5e5;
+            --card-bg: #f8f9fa;
+            --input-bg: #ffffff;
+            --input-border: #ced4da;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --hover-bg: #f0f0f0;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-color: #141414;
+            --text-color: #ffffff;
+            --primary-color: #e50914;
+            --secondary-color: #1f1f1f;
+            --nav-bg: rgba(20, 20, 20, 0.95);
+            --modal-bg: #1f1f1f;
+            --border-color: #333;
+            --card-bg: #1f1f1f;
+            --input-bg: #2b2b2b;
+            --input-border: #404040;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --hover-bg: #2a2a2a;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .nav-brand {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-brand img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .nav-brand span {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .nav-sections {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: var(--hover-bg);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            padding-left: 2.5rem;
+            border-radius: 50px;
+            border: 2px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .search-bar:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-color-alpha);
+        }
+
+        .search-bar:focus + i {
+            color: var(--primary-color);
+            opacity: 1;
+        }
+
+        #authButtons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        #authButtons a {
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        #authButtons a:first-child {
+            color: var(--text-color);
+            background: transparent;
+            border: 2px solid var(--border-color);
+        }
+
+        #authButtons a:last-child {
+            color: white;
+            background: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        #authButtons a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px 12px;
+            margin-right: 16px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            border-color: var(--primary-color);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .theme-toggle:hover i {
+            transform: rotate(360deg);
+        }
+
+        .theme-toggle span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Card and Modal Styles */
+        .card, .modal-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px var(--shadow-color);
+        }
+
+        /* Form Controls */
+        .form-control {
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 1px solid var(--input-border);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-color-alpha);
+            background-color: var(--input-bg);
+        }
+
+        /* Navigation Links */
+        .nav-links a {
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 1px solid var(--input-border);
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            background-color: var(--input-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-color-alpha);
+        }
+
+        /* Dropdown Menu */
+        .dropdown-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--hover-bg);
+        }
+
+        /* Update existing styles to use CSS variables */
+        .modal-content {
+            background-color: var(--modal-bg);
+            color: var(--text-color);
+        }
+
+        .form-control {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+        }
+
+        /* Hero Section Enhancements */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(
+                135deg,
+                rgba(20, 20, 20, 0.9),
+                rgba(40, 40, 40, 0.8)
+            );
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/images/hero-bg.jpg') center/cover no-repeat;
+            filter: brightness(0.3) saturate(1.2);
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(
+                45deg,
+                var(--primary-color),
+                #ff4b2b,
+                #ff416c
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(229, 9, 20, 0.5));
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .scroll-indicator:hover {
+            opacity: 1;
+        }
+
+        .scroll-indicator .mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .scroll-indicator .mouse::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 2px;
+            animation: scrollWheel 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollWheel {
+            0% {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, 20px);
+                opacity: 0;
+            }
+        }
+
+        .scroll-indicator .text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .epic-showcase {
+            padding: 4rem 2rem;
+            background: var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .epic-cards-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 2rem 0;
+        }
+
+        .epic-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px var(--shadow-color);
+            transform-origin: center center;
+        }
+
+        .epic-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, 
+                rgba(0,0,0,0.9) 0%,
+                rgba(0,0,0,0.5) 30%,
+                rgba(0,0,0,0.1) 100%
+            );
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        .epic-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .epic-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            z-index: 2;
+            transform: translateY(70%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .epic-content h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .epic-content p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .epic-cards-container:hover .epic-card:not(:hover) {
+            transform: scale(0.95);
+            filter: brightness(0.4);
+        }
+
+        .epic-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+
+        .epic-card:hover::before {
+            opacity: 0.4;
+        }
+
+        .epic-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .epic-card:hover .epic-content {
+            transform: translateY(0);
+        }
+
+        .epic-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .epic-card:hover .epic-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .epic-btn:hover {
+            background: #f40612;
+            box-shadow: 0 4px 12px rgba(229, 9, 20, 0.5);
+        }
+
+        .story-generator-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(45deg, var(--secondary-color), #1a1a1a);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-generator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .generator-content {
+            animation: slideInLeft 1s var(--animation-curve);
+        }
+
+        .generator-preview {
+            position: relative;
+            height: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            animation: slideInRight 1s var(--animation-curve);
+        }
+
+        .generator-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .generator-preview::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(229, 9, 20, 0.5), rgba(0, 0, 0, 0.5));
+        }
+
+        .generator-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .featured-scene {
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+        }
+
+        .scene-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .story-generator-container {
+                grid-template-columns: 1fr;
+            }
+
+            .scene-container {
+                grid-template-columns: 1fr;
+            }
+
+            .epic-card {
+                min-width: 100%;
+            }
+        }
+
+        /* Add Netflix-style avatar styles */
+        .avatar {
+            width: 32px;
+            height: 32px;
+            background: #e50914;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .avatar:hover {
+            background: #f40612;
+        }
+
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #141414;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            border: 1px solid #333;
+            border-radius: 4px;
+            z-index: 1;
+        }
+
+        .profile-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #333;
+        }
+
+        /* Animated Background */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, 
+                rgba(20, 20, 20, 0.9),
+                rgba(229, 9, 20, 0.8)),
+                url('assets/images/Ayodhya.jpeg') center/cover;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Elements Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Glowing Text Effect */
+        .glow-text {
+            animation: glowing 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowing {
+            from { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color); }
+            to { text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color), 0 0 40px var(--primary-color); }
+        }
+
+        /* Navigation Hover Effects */
+        .nav-links a {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .nav-links a i {
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a:hover i {
+            transform: scale(1.2) rotate(360deg);
+        }
+
+        /* Card Hover Effects */
+        .epic-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .epic-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .epic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(229, 9, 20, 0.5),
+                rgba(0, 0, 0, 0.8));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .epic-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Particle Effects */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Particle System Styles */
+        .particle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(229, 9, 20, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        /* Hero Section Particles */
+        .hero-particles .particle {
+            animation: heroParticleFloat 4s ease-in-out infinite;
+            background: rgba(var(--particle-color), 0.3);
+        }
+
+        @keyframes heroParticleFloat {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Feature Section Particles */
+        .featured-particles .particle {
+            background: rgba(255, 255, 255, 0.3);
+            filter: blur(1px);
+            animation: featuredParticleSwirl 6s ease-in-out infinite;
+        }
+
+        @keyframes featuredParticleSwirl {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            25% {
+                opacity: 0.4;
+            }
+            50% {
+                transform: translate(var(--x), var(--y)) rotate(180deg) scale(1.5);
+                opacity: 0.6;
+            }
+            75% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translate(calc(var(--x) * 2), calc(var(--y) * 2)) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Quick Links Particles */
+        .quicklinks-particles .particle {
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            animation: quicklinksParticleFloat 5s ease-in-out infinite;
+            backdrop-filter: blur(2px);
+        }
+
+        @keyframes quicklinksParticleFloat {
+            0% {
+                transform: translate(0, 0) scale(0.5);
+                opacity: 0;
+            }
+            25% {
+                transform: translate(var(--x), var(--y)) scale(1);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translate(calc(var(--x) * 1.5), calc(var(--y) * 1.5)) scale(1.5);
+                opacity: 0.2;
+            }
+            100% {
+                transform: translate(calc(var(--x) * 2), calc(var(--y) * 2)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Section Styles */
+        .section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section:hover .particle-container .particle {
+            animation-play-state: running;
+        }
+
+        /* Particle Trail Effect */
+        .particle-trail {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .trail {
+            position: absolute;
+            background: radial-gradient(circle at center,
+                rgba(229, 9, 20, 0.2),
+                transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: trailFade 1s ease-out forwards;
+        }
+
+        @keyframes trailFade {
+            0% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Content Animation Classes */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), #ff4b2b);
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff4b2b;
+        }
+
+        /* Theme Toggle Animation */
+        .theme-toggle {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .theme-toggle:hover::before {
+            width: 200%;
+            height: 200%;
+        }
+
+        /* Cosmic Background Animation */
+        .cosmic-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+        }
+
+        .stars, .twinkling, .clouds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stars {
+            background: #000 url('assets/images/stars.png') repeat top center;
+            z-index: 0;
+        }
+
+        .twinkling {
+            background: transparent url('assets/images/twinkling.png') repeat top center;
+            z-index: 1;
+            animation: move-twinkle 200s linear infinite;
+        }
+
+        .clouds {
+            background: transparent url('assets/images/clouds.png') repeat top center;
+            z-index: 2;
+            animation: move-clouds 100s linear infinite;
+        }
+
+        @keyframes move-twinkle {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
+
+        @keyframes move-clouds {
+            from { background-position: 0 0; }
+            to { background-position: 10000px 0; }
+        }
+
+        /* Story Generator Section Styles */
+        .story-generator-section {
+            position: relative;
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            overflow: hidden;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Floating Scroll Animation */
+        .floating-scroll {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .scroll-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .magical-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, 
+                rgba(255, 215, 0, 0.3) 0%,
+                rgba(255, 215, 0, 0) 70%);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+        }
+
+        /* Enchanted Text Styles */
+        .enchanted-text {
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            line-height: 1.6;
+        }
+
+        .highlight-text {
+            color: var(--primary-color);
+            font-weight: bold;
+            position: relative;
+        }
+
+        .highlight-text::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--primary-color), 
+                transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .magical-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* CTA Button Styles */
+        .cta-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            margin: 2rem auto;
+            font-size: 1.2rem;
+            color: #fff;
+            background: linear-gradient(45deg, var(--primary-color), #ff4b2b);
+            border-radius: 50px;
+            text-decoration: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .button-text {
+            position: relative;
+            z-index: 1;
+            margin-right: 1rem;
+        }
+
+        .button-icon {
+            position: relative;
+            z-index: 1;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover .button-icon {
+            transform: rotate(360deg);
+        }
+
+        .button-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .enchanted-text {
+                font-size: 1.2rem;
+            }
+
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Enhanced Cosmic Background */
+        .cosmic-background {
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+        }
+
+        .stars {
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            animation: twinkle 5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.2);
+        }
+
+        .card-glow {
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                rgba(229, 9, 20, 0.2) 0%,
+                transparent 80%);
+        }
+
+        /* Epic CTA Button */
+        .cta-container {
+            position: relative;
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            perspective: 1000px;
+        }
+
+        .epic-cta {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.8rem 3.5rem;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            overflow: hidden;
+            background: linear-gradient(45deg, 
+                #1a1a1a,
+                var(--primary-color),
+                #1a1a1a);
+            background-size: 300% 300%;
+            animation: gradientShift 8s ease infinite;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 10px 30px rgba(229, 9, 20, 0.3),
+                0 0 0 2px rgba(229, 9, 20, 0.3),
+                inset 0 0 15px rgba(229, 9, 20, 0.3);
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+        }
+
+        .epic-cta:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, 
+                rgba(229, 9, 20, 0.5), 
+                transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .epic-cta:hover {
+            transform: translateY(-5px) translateZ(10px);
+            box-shadow: 
+                0 20px 40px rgba(229, 9, 20, 0.4),
+                0 0 0 4px rgba(229, 9, 20, 0.4),
+                inset 0 0 30px rgba(229, 9, 20, 0.4);
+        }
+
+        .epic-cta:hover:before {
+            opacity: 1;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cta-text {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(to right, #fff, #ff9966, #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textShine 3s linear infinite;
+        }
+
+        @keyframes textShine {
+            0% { background-position: -500% 50%; }
+            100% { background-position: 500% 50%; }
+        }
+
+        .cta-effects {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cta-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #fff;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .epic-cta:hover .cta-particle:nth-child(1) {
+            animation: particleBurst1 1.2s ease-out infinite;
+        }
+
+        .epic-cta:hover .cta-particle:nth-child(2) {
+            animation: particleBurst2 1.2s ease-out infinite 0.2s;
+        }
+
+        .epic-cta:hover .cta-particle:nth-child(3) {
+            animation: particleBurst3 1.2s ease-out infinite 0.4s;
+        }
+
+        @keyframes particleBurst1 {
+            0% { 
+                transform: translate(0, 0) scale(1); 
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
+            }
+            100% { 
+                transform: translate(-50px, -50px) scale(0); 
+                opacity: 0;
+                box-shadow: 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes particleBurst2 {
+            0% { 
+                transform: translate(0, 0) scale(1); 
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
+            }
+            100% { 
+                transform: translate(50px, -50px) scale(0); 
+                opacity: 0;
+                box-shadow: 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        @keyframes particleBurst3 {
+            0% { 
+                transform: translate(0, 0) scale(1); 
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
+            }
+            100% { 
+                transform: translate(0, -70px) scale(0); 
+                opacity: 0;
+                box-shadow: 0 0 0 rgba(229, 9, 20, 0);
+            }
+        }
+
+        .cta-border {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid rgba(229, 9, 20, 0.3);
+            border-radius: 52px;
+            pointer-events: none;
+            animation: borderPulse 2s ease-out infinite;
+        }
+
+        @keyframes borderPulse {
+            0% { 
+                transform: scale(1);
+                border-color: rgba(229, 9, 20, 0.3);
+            }
+            50% { 
+                transform: scale(1.02);
+                border-color: rgba(229, 9, 20, 0.5);
+            }
+            100% { 
+                transform: scale(1);
+                border-color: rgba(229, 9, 20, 0.3);
+            }
+        }
+
+        /* Flame effect */
+        .epic-cta:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, 
+                rgba(229, 9, 20, 0.4) 0%,
+                transparent 50%);
+            transform: rotate(0deg);
+            animation: flameEffect 3s ease-in-out infinite;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .epic-cta:hover:after {
+            opacity: 1;
+        }
+
+        @keyframes flameEffect {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Energy field effect */
+        .energy-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(229, 9, 20, 0.1) 0%,
+                    rgba(229, 9, 20, 0.2) 10%,
+                    rgba(229, 9, 20, 0.1) 20%
+                );
+            background-size: 200% 200%;
+            animation: energyFlow 3s linear infinite;
+        }
+
+        .epic-cta:hover .energy-field {
+            opacity: 1;
+        }
+
+        @keyframes energyFlow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 200%; }
+        }
+
+        /* Section Partition */
+        .section-partition {
+            position: relative;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(229, 9, 20, 0.3) 20%, 
+                rgba(229, 9, 20, 0.5) 50%, 
+                rgba(229, 9, 20, 0.3) 80%, 
+                transparent 100%
+            );
+            margin: 4rem auto;
+            width: 80%;
+            overflow: visible;
+        }
+
+        .section-partition::before {
+            content: "❖";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--background-color);
+            padding: 0 20px;
+            color: rgba(229, 9, 20, 0.7);
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+        }
+
+        .section-partition::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(229, 9, 20, 0.2), 
+                transparent
+            );
+            animation: partitionGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes partitionGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Quick Links Card Enhancements */
+        .quick-links .feature-card {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .quick-links .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.2);
+        }
+
+        .quick-links .feature-card::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            transition: width 0.3s ease;
+        }
+
+        .quick-links .feature-card:hover::after {
+            width: 80%;
+        }
+
+        /* Featured Epics Card Enhancements */
+        .featured .feature-card {
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(229, 9, 20, 0.1),
+                rgba(255, 75, 43, 0.1)
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .featured .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.2);
+        }
+
+        .featured .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .featured .feature-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--primary-color),
+                transparent
+            );
+            transform: translateX(-50%);
+            transition: width 0.4s ease;
+        }
+
+        .featured .feature-card:hover::after {
+            width: 80%;
+        }
+
+        .featured .feature-card .magical-icon {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.4s ease, color 0.4s ease;
+        }
+
+        .featured .feature-card:hover .magical-icon {
+            transform: scale(1.1) rotate(360deg);
+            color: var(--primary-color);
+        }
+
+        .featured .feature-card h3 {
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .featured .feature-card:hover h3 {
+            color: var(--primary-color);
+        }
+
+        .featured .feature-card .card-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at var(--mouse-x) var(--mouse-y),
+                rgba(229, 9, 20, 0.2),
+                transparent 100px
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .featured .feature-card:hover .card-glow {
+            opacity: 1;
+        }
+
+        /* Hero Color Animation Effects */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                rgba(229, 9, 20, 0.2),
+                rgba(255, 75, 43, 0.2),
+                rgba(147, 112, 219, 0.2),
+                rgba(0, 191, 255, 0.2)
+            );
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-title {
+            animation: titleAnimation 8s ease infinite;
+            background-size: 300% 300%;
+            background-image: linear-gradient(
+                45deg,
+                var(--primary-color),
+                #ff4b2b,
+                #ff416c,
+                #7928ca,
+                #ff0080,
+                var(--primary-color)
+            );
+        }
+
+        @keyframes titleAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle at center,
+                transparent 30%,
+                rgba(229, 9, 20, 0.1) 70%,
+                transparent 100%
+            );
+            animation: pulseGlow 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2) rotate(180deg);
+                opacity: 0.5;
+            }
+        }
+
+        .hero-subtitle {
+            position: relative;
+            animation: subtitleGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes subtitleGlow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 75, 43, 0.5);
+            }
+        }
+
+        .hero-buttons {
+            position: relative;
+        }
+
+        .hero-buttons::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(229, 9, 20, 0.3),
+                transparent
+            );
+            animation: lineFlow 3s ease-in-out infinite;
+        }
+
+        @keyframes lineFlow {
+            0%, 100% {
+                width: 80%;
+                opacity: 0.3;
+            }
+            50% {
+                width: 120%;
+                opacity: 0.6;
+            }
+        }
+
+        /* Enhanced Scroll Indicator */
+        .scroll-indicator .mouse {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-indicator .mouse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            animation: borderGlow 4s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0% {
+                border-color: rgba(229, 9, 20, 0.3);
+                box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+            }
+            33% {
+                border-color: rgba(255, 75, 43, 0.3);
+                box-shadow: 0 0 10px rgba(255, 75, 43, 0.3);
+            }
+            66% {
+                border-color: rgba(147, 112, 219, 0.3);
+                box-shadow: 0 0 10px rgba(147, 112, 219, 0.3);
+            }
+            100% {
+                border-color: rgba(229, 9, 20, 0.3);
+                box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Particle Effects Container -->
+    <div id="particles-js"></div>
+
+    <nav class="navbar">
+        <div class="particle-container nav-particles"></div>
+        <div class="nav-brand">
+            <a href="index.html" class="logo">
+                <img src="./Logo/Logo.jpg" alt="ITHIHAS Logo" />
+                <span>ITHIHAS</span>
+            </a>
+        </div>
+        
+        <div class="nav-sections">
+            <div class="nav-links">
+                <div id="profileSection" style="display: none;">
+                    <div class="profile-dropdown">
+                        <div class="avatar">👤</div>
+                        <div class="dropdown-content">
+                            <a href="#" id="editProfileBtn"><i class="fas fa-user-edit"></i> Edit Profile</a>
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+                <a href="library.html"><i class="fas fa-book"></i> Library</a>
+                <a href="characters.html"><i class="fas fa-users"></i> Featured Characters</a>
+                <a href="teachings.html"><i class="fas fa-dharmachakra"></i> Teachings</a>
+                <a href="FAQ.html"><i class="fas fa-question-circle"></i> FAQ</a>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <div class="search-container">
+                <input type="search" class="search-bar" placeholder="Search epics, stories, characters..." aria-label="Search content">
+                <i class="fas fa-search"></i>
+            </div>
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+                <span class="theme-text">Dark</span>
+            </button>
+            <div id="authButtons" style="display: none;">
+                <a href="login.html">Login</a>
+                <a href="registration.html">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Edit Profile</h2>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="profileName">Name</label>
+                    <input type="text" id="profileName" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="profileAge">Age</label>
+                    <input type="number" id="profileAge" name="age" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="profileLocation">Location</label>
+                    <input type="text" id="profileLocation" name="location" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="profileFavoriteEpic">Favorite Epic</label>
+                    <select id="profileFavoriteEpic" name="favoriteEpic" class="form-control">
+                        <option value="Ramayana">Ramayana</option>
+                        <option value="Mahabharata">Mahabharata</option>
+                        <option value="Bhagavata">Bhagavata</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="button" class="btn btn-secondary" id="closeModal">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="particle-container hero-particles"></div>
+            <div class="particle-trail"></div>
+            <div class="hero-content">
+                <h1 class="hero-title" data-aos="fade-down">Discover Ancient Wisdom</h1>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+                    Explore the timeless stories and teachings of Indian epics through our AI-powered platform
+                </p>
+                <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                    <a href="story-generator.html" class="epic-cta">
+                        <span class="cta-text">Start Your Journey</span>
+                        <div class="cta-effects">
+                            <div class="cta-particle"></div>
+                            <div class="cta-particle"></div>
+                            <div class="cta-particle"></div>
+                        </div>
+                        <div class="energy-field"></div>
+                        <div class="cta-border"></div>
+                    </a>
+                    <a href="about.html" class="epic-cta secondary">
+                        <span class="cta-text">Learn More</span>
+                        <div class="cta-effects">
+                            <div class="cta-particle"></div>
+                            <div class="cta-particle"></div>
+                        </div>
+                        <div class="energy-field"></div>
+                        <div class="cta-border"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="scroll-indicator" onclick="scrollToNextSection()">
+                <div class="mouse"></div>
+                <span class="text">Scroll</span>
+            </div>
+        </section>
+
+        <section class="epic-showcase" id="explore">
+            <div class="epic-cards-container">
+                <!-- Ramayana Card -->
+                <div class="epic-card">
+                    <img src="Ramayan.jpeg" alt="Ramayana Epic" loading="lazy">
+                    <div class="epic-content">
+                        <h3>Ramayana</h3>
+                        <p>Journey through the divine tale of Lord Rama, exploring dharma, devotion, and righteousness.</p>
+                        <div class="epic-meta">
+                            <span><i class="fas fa-book"></i> 7 Kandas</span>
+                            <span><i class="fas fa-scroll"></i> 24,000 Verses</span>
+                        </div>
+                        <div class="epic-actions">
+                            <a href="ramayana.html" class="btn btn-primary">Explore Kandas</a>
+                            <a href="ramayana_characters.html" class="btn btn-outline">Characters</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mahabharata Card -->
+                <div class="epic-card">
+                    <img src="Mahabharath.jpeg" alt="Mahabharata Epic" loading="lazy">
+                    <div class="epic-content">
+                        <h3>Mahabharata</h3>
+                        <p>Delve into the epic tale of duty, wisdom, and righteousness through the greatest war ever fought.</p>
+                        <div class="epic-meta">
+                            <span><i class="fas fa-book"></i> 18 Parvas</span>
+                            <span><i class="fas fa-scroll"></i> 100,000 Verses</span>
+                        </div>
+                        <div class="epic-actions">
+                            <a href="mahabharath.html" class="btn btn-primary">Explore Parvas</a>
+                            <a href="mahabharata_characters.html" class="btn btn-outline">Characters</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bhagavad Gita Card -->
+                <div class="epic-card">
+                    <img src="Bhagawad geetha.jpeg" alt="Bhagavad Gita" loading="lazy">
+                    <div class="epic-content">
+                        <h3>Bhagavad Gita</h3>
+                        <p>Discover the divine discourse between Krishna and Arjuna, revealing the essence of dharma and karma.</p>
+                        <div class="epic-meta">
+                            <span><i class="fas fa-book"></i> 18 Chapters</span>
+                            <span><i class="fas fa-scroll"></i> 700 Verses</span>
+                        </div>
+                        <div class="epic-actions">
+                            <a href="bhagavadgita.html" class="btn btn-primary">Read Chapters</a>
+                            <a href="bhagavadgita_characters.html" class="btn btn-outline">Characters</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Partition -->
+        <div class="section-partition"></div>
+
+        <!-- Quick Links Section -->
+        <section class="quick-links">
+            <div class="particle-container quicklinks-particles"></div>
+            <div class="particle-trail"></div>
+            <div class="content-wrapper slide-up">
+                <h2 class="section-title glow-text">Quick Links</h2>
+                <div class="generator-container">
+                    <div class="generator-content fade-in">
+                        <p class="enchanted-text">
+                            Access our most popular resources and features.
+                        </p>
+                        
+                        <div class="feature-cards">
+                            <a href="library.html" class="feature-card" data-aos="fade-right">
+                                <i class="fas fa-book magical-icon"></i>
+                                <h3>Library</h3>
+                                <p>Explore our collection of epics, stories, and teachings.</p>
+                                <div class="card-glow"></div>
+                            </a>
+                            
+                            <a href="characters.html" class="feature-card" data-aos="fade-up">
+                                <i class="fas fa-users magical-icon"></i>
+                                <h3>Characters</h3>
+                                <p>Discover the legendary heroes and villains of Indian mythology.</p>
+                                <div class="card-glow"></div>
+                            </a>
+                            
+                            <a href="teachings.html" class="feature-card" data-aos="fade-left">
+                                <i class="fas fa-dharmachakra magical-icon"></i>
+                                <h3>Teachings</h3>
+                                <p>Learn from the timeless wisdom of Indian epics and scriptures.</p>
+                                <div class="card-glow"></div>
+                            </a>
+                        </div>
+
+                        <div class="cta-container">
+                            <a href="about.html" class="epic-cta">
+                                <span class="cta-text">Learn More</span>
+                                <div class="cta-effects">
+                                    <div class="cta-particle"></div>
+                                    <div class="cta-particle"></div>
+                                    <div class="cta-particle"></div>
+                                </div>
+                                <div class="energy-field"></div>
+                                <div class="cta-border"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Scene -->
+        <section class="featured-scene">
+            <div class="scene-container">
+                <div class="scene-content">
+                    <h2>Featured: The Great War</h2>
+                    <p>Experience the epic moments of the Kurukshetra war, where dharma and adharma clash in the ultimate battle for righteousness.</p>
+                    <div class="scene-actions mt-4">
+                        <a href="mahabharath.html#war" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+                <div class="scene-image">
+                    <img src="./assets/images/Mahabharath_parvas/6.jpeg" alt="Featured Scene" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Section -->
+        <section class="featured">
+            <div class="particle-container featured-particles"></div>
+            <div class="particle-trail"></div>
+            <div class="content-wrapper slide-up">
+                <h2 class="section-title glow-text">Featured Epics</h2>
+                <div class="generator-container">
+                    <div class="generator-content fade-in">
+                        <p class="enchanted-text">
+                            Explore the timeless stories and teachings of Indian epics through our curated selection.
+                        </p>
+                        
+                        <div class="feature-cards">
+                            <a href="ramayana.html" class="feature-card" data-aos="fade-right">
+                                <i class="fas fa-book magical-icon"></i>
+                                <h3>Ramayana</h3>
+                                <p>Journey through the divine tale of Lord Rama, exploring dharma, devotion, and righteousness.</p>
+                                <div class="card-glow"></div>
+                            </a>
+                            
+                            <a href="mahabharath.html" class="feature-card" data-aos="fade-up">
+                                <i class="fas fa-scroll magical-icon"></i>
+                                <h3>Mahabharath</h3>
+                                <p>Delve into the epic tale of duty, wisdom, and righteousness through the greatest war ever fought.</p>
+                                <div class="card-glow"></div>
+                            </a>
+                            
+                            <a href="bhagavadgita.html" class="feature-card" data-aos="fade-left">
+                                <i class="fas fa-dharmachakra magical-icon"></i>
+                                <h3>Bhagavad Gita</h3>
+                                <p>Discover the divine discourse between Krishna and Arjuna, revealing the essence of dharma and karma.</p>
+                                <div class="card-glow"></div>
+                            </a>
+                        </div>
+
+                        <div class="cta-container">
+                            <a href="library.html" class="epic-cta">
+                                <span class="cta-text">Explore Epics</span>
+                                <div class="cta-effects">
+                                    <div class="cta-particle"></div>
+                                    <div class="cta-particle"></div>
+                                    <div class="cta-particle"></div>
+                                </div>
+                                <div class="energy-field"></div>
+                                <div class="cta-border"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story Generator Section -->
+        <section class="story-generator-section" id="story-generator">
+            <div class="cosmic-background">
+                <div class="stars"></div>
+                <div class="twinkling"></div>
+                <div class="clouds"></div>
+            </div>
+            
+            <div class="content-wrapper slide-up">
+                <h2 class="section-title glow-text">AI Story Generator</h2>
+                <div class="generator-container">
+                    <div class="generator-content fade-in">
+                        <p class="enchanted-text">
+                            Embark on a mystical journey through ancient Indian mythology with our 
+                            <span class="highlight-text">AI-powered Story Generator</span>. 
+                            Witness tales come alive with divine inspiration!
+                        </p>
+                        
+                        <div class="feature-cards">
+                            <div class="feature-card" data-aos="fade-right">
+                                <i class="fas fa-brain magical-icon"></i>
+                                <h3>Intelligent Storytelling</h3>
+                                <p>Advanced AI crafts unique narratives</p>
+                                <div class="card-glow"></div>
+                            </div>
+                            
+                            <div class="feature-card" data-aos="fade-up">
+                                <i class="fas fa-book-open magical-icon"></i>
+                                <h3>Rich Mythology</h3>
+                                <p>Deep roots in ancient wisdom</p>
+                                <div class="card-glow"></div>
+                            </div>
+                            
+                            <div class="feature-card" data-aos="fade-left">
+                                <i class="fas fa-magic magical-icon"></i>
+                                <h3>Magical Experience</h3>
+                                <p>Immersive storytelling journey</p>
+                                <div class="card-glow"></div>
+                            </div>
+                        </div>
+
+                        <div class="cta-container">
+                            <a href="story-generator.html" class="epic-cta">
+                                <span class="cta-text">Generate Your Epic Tale</span>
+                                <div class="cta-effects">
+                                    <div class="cta-particle"></div>
+                                    <div class="cta-particle"></div>
+                                    <div class="cta-particle"></div>
+                                </div>
+                                <div class="energy-field"></div>
+                                <div class="cta-border"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Stay updated with our latest stories and features.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ITHIHAS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/common.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particle System
+        class ParticleSystem {
+            constructor(container, options = {}) {
+                this.container = container;
+                this.options = {
+                    particleCount: options.particleCount || 20,
+                    minSize: options.minSize || 2,
+                    maxSize: options.maxSize || 6,
+                    speed: options.speed || 1,
+                    colors: options.colors || ['rgba(229, 9, 20, 0.5)'],
+                    isDynamic: options.isDynamic || false
+                };
+                this.particles = [];
+                this.init();
+            }
+
+            init() {
+                for (let i = 0; i < this.options.particleCount; i++) {
+                    this.createParticle();
+                }
+            }
+
+            createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * (this.options.maxSize - this.options.minSize) + this.options.minSize;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                if (this.options.isDynamic) {
+                    const color = getRandomColor();
+                    particle.style.setProperty('--particle-color', color.join(','));
+                } else {
+                    const color = this.options.colors[Math.floor(Math.random() * this.options.colors.length)];
+                    particle.style.background = color;
+                }
+                
+                this.resetParticle(particle);
+                this.container.appendChild(particle);
+                this.particles.push(particle);
+
+                particle.addEventListener('animationend', () => {
+                    if (this.options.isDynamic) {
+                        const color = getRandomColor();
+                        particle.style.setProperty('--particle-color', color.join(','));
+                    }
+                    this.resetParticle(particle);
+                });
+            }
+
+            resetParticle(particle) {
+                const rect = this.container.getBoundingClientRect();
+                
+                particle.style.left = Math.random() * rect.width + 'px';
+                particle.style.top = rect.height + 'px';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 100 + 50;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                
+                particle.style.setProperty('--x', x + 'px');
+                particle.style.setProperty('--y', y + 'px');
+            }
+        }
+
+        // Trail Effect
+        class TrailEffect {
+            constructor(container) {
+                this.container = container;
+                this.trails = [];
+                this.init();
+            }
+
+            init() {
+                this.container.addEventListener('mousemove', (e) => {
+                    const rect = this.container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    this.createTrail(x, y);
+                });
+            }
+
+            createTrail(x, y) {
+                const trail = document.createElement('div');
+                trail.className = 'trail';
+                trail.style.left = x + 'px';
+                trail.style.top = y + 'px';
+                trail.style.width = '50px';
+                trail.style.height = '50px';
+                
+                this.container.appendChild(trail);
+                this.trails.push(trail);
+
+                trail.addEventListener('animationend', () => {
+                    trail.remove();
+                    this.trails = this.trails.filter(t => t !== trail);
+                });
+            }
+        }
+
+        // Initialize Particle Systems
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hero Particles with dynamic colors
+            new ParticleSystem(document.querySelector('.hero-particles'), {
+                particleCount: 30,
+                minSize: 3,
+                maxSize: 8,
+                isDynamic: true
+            });
+
+            // Featured Section Particles
+            new ParticleSystem(document.querySelector('.featured-particles'), {
+                particleCount: 25,
+                minSize: 4,
+                maxSize: 10,
+                colors: ['rgba(255, 255, 255, 0.3)']
+            });
+
+            // Quick Links Particles
+            new ParticleSystem(document.querySelector('.quicklinks-particles'), {
+                particleCount: 20,
+                minSize: 2,
+                maxSize: 6,
+                colors: ['rgba(255, 255, 255, 0.2)', 'rgba(255, 255, 255, 0.1)']
+            });
+
+            // Initialize Trail Effects for all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const trail = section.querySelector('.particle-trail');
+                if (trail) {
+                    new TrailEffect(trail);
+                }
+            });
+        });
+
+        // Dynamic color generator for hero particles
+        function getRandomColor() {
+            const colors = [
+                [229, 9, 20],    // Red
+                [255, 165, 0],   // Orange
+                [255, 215, 0],   // Gold
+                [147, 112, 219], // Purple
+                [0, 191, 255],   // Deep Sky Blue
+                [50, 205, 50]    // Lime Green
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Initialize Particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#e50914' },
+                shape: { type: 'circle' },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    animation: { enable: true, speed: 2, minimumValue: 0.1, sync: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#e50914',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    outModes: { default: 'bounce' },
+                    attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                }
+            },
+            interactivity: {
+                detectsOn: 'canvas',
+                events: {
+                    onHover: { enable: true, mode: 'repulse' },
+                    onClick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+                modes: {
+                    repulse: { distance: 100, duration: 0.4 },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Scroll Progress Indicator
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.slide-up, .fade-in').forEach(el => observer.observe(el));
+
+        window.addEventListener('load', () => {
+            const auth = new Auth();
+            const themeManager = new ThemeManager();
+            
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            const themeText = themeToggle.querySelector('.theme-text');
+            
+            function updateThemeUI() {
+                const currentTheme = themeManager.getCurrentTheme();
+                themeIcon.className = currentTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+                themeText.textContent = currentTheme === 'dark' ? 'Dark' : 'Light';
+                
+                // Update meta theme-color
+                document.querySelector('meta[name="theme-color"]').setAttribute(
+                    'content',
+                    currentTheme === 'dark' ? '#141414' : '#ffffff'
+                );
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                themeManager.toggleTheme();
+                updateThemeUI();
+            });
+            
+            // Initialize theme UI
+            updateThemeUI();
+
+            // Check authentication status
+            function updateAuthUI() {
+                const profileSection = document.getElementById('profileSection');
+                const authButtons = document.getElementById('authButtons');
+                const user = auth.getCurrentUser();
+
+                if (user) {
+                    profileSection.style.display = 'block';
+                    authButtons.style.display = 'none';
+                } else {
+                    profileSection.style.display = 'none';
+                    authButtons.style.display = 'block';
+                }
+            }
+
+            // Profile modal functionality
+            const modal = document.getElementById('profileModal');
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const closeModal = document.getElementById('closeModal');
+            const profileForm = document.getElementById('profileForm');
+
+            if (editProfileBtn) {
+                editProfileBtn.addEventListener('click', function() {
+                    const user = auth.getCurrentUser();
+                    if (user) {
+                        document.getElementById('profileName').value = user.name || '';
+                        document.getElementById('profileAge').value = user.age || '';
+                        document.getElementById('profileLocation').value = user.location || '';
+                        document.getElementById('profileFavoriteEpic').value = user.favoriteEpic || 'Ramayana';
+                        modal.style.display = 'block';
+                    }
+                });
+            }
+
+            if (closeModal) {
+                closeModal.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+            }
+
+            if (profileForm) {
+                profileForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = {
+                        name: document.getElementById('profileName').value,
+                        age: document.getElementById('profileAge').value,
+                        location: document.getElementById('profileLocation').value,
+                        favoriteEpic: document.getElementById('profileFavoriteEpic').value
+                    };
+
+                    try {
+                        // Update the current user's data
+                        const currentUser = auth.getCurrentUser();
+                        const updatedUser = { ...currentUser, ...formData };
+                        localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+                        
+                        modal.style.display = 'none';
+                        updateAuthUI();
+                    } catch (error) {
+                        alert(error.message);
+                    }
+                });
+            }
+
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    auth.logout();
+                    window.location.href = 'index.html';
+                });
+            }
+
+            // Initialize UI
+            updateAuthUI();
+        });
+    </script>
+    <script>
+        // Mouse glow effect for featured cards
+        document.querySelectorAll('.featured .feature-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>
