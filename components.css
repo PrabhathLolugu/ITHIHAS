@@ -1,0 +1,350 @@
+/* Common Components CSS */
+:root {
+    /* Colors */
+    --primary-color: #e50914;
+    --secondary-color: #141414;
+    --text-color: #ffffff;
+    --hover-color: #ff0f1f;
+    --card-bg: #181818;
+    --overlay-color: rgba(0, 0, 0, 0.75);
+    --glass-bg: rgba(25, 32, 48, 0.8);
+    --glass-border: rgba(100, 255, 218, 0.1);
+    --border-color: rgba(100, 255, 218, 0.2);
+    --glow-color: #64ffda;
+    
+    /* Animations */
+    --transition-speed: 0.3s;
+    --animation-curve: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glassmorphism Card */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(100px);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: transform var(--transition-speed) var(--animation-curve);
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--glow-color);
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all var(--transition-speed) var(--animation-curve);
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--text-color);
+}
+
+.btn-primary:hover {
+    background: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Navigation */
+.navbar {
+    background: linear-gradient(180deg, rgba(0,0,0,0.9) 10%, transparent);
+    position: fixed;
+    width: 100%;
+    padding: 1rem 4%;
+    z-index: 1000;
+    transition: background-color var(--transition-speed) var(--animation-curve);
+}
+
+.navbar.scrolled {
+    background: var(--secondary-color);
+}
+
+/* Search Bar */
+.search-container {
+    position: relative;
+}
+
+.search-bar {
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.8rem 2.5rem 0.8rem 1rem;
+    border-radius: 4px;
+    width: 200px;
+    transition: all var(--transition-speed) var(--animation-curve);
+}
+
+.search-bar:focus {
+    width: 300px;
+    border-color: var(--glow-color);
+    outline: none;
+}
+
+/* Cards */
+.content-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform var(--transition-speed) var(--animation-curve);
+}
+
+.content-card:hover {
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+/* Loading Animation */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-speed) var(--animation-curve);
+    z-index: 1000;
+}
+
+.theme-toggle:hover {
+    transform: rotate(45deg);
+}
+
+/* Tooltips */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]:before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 1rem;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-speed) var(--animation-curve);
+}
+
+[data-tooltip]:hover:before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--primary-color);
+    color: var(--text-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-speed) var(--animation-curve);
+    z-index: 1000;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-bar:focus {
+        width: 200px;
+    }
+    
+    .navbar {
+        padding: 1rem 2%;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.2rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s var(--animation-curve) forwards;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--secondary-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--hover-color);
+}
+/* Glass Effect */
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 6px var(--shadow-color);
+  }
+  
+  /* Navbar */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
+  
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .logo img {
+    border-radius: 8px;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  
+  /* Navigation Links */
+  .nav-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-links a {
+    color: var(--text-secondary);
+    transition: var(--transition-fast);
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--accent);
+  }
+  
+  /* Profile Dropdown */
+  .profile-dropdown {
+    position: relative;
+  }
+  
+  .avatar-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    min-width: 200px;
+    display: none;
+  }
+  
+  .profile-dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    transition: var(--transition-fast);
+  }
+  
+  .dropdown-menu a:hover {
+    background: var(--glass-border);
+    border-radius: 4px;
+  }

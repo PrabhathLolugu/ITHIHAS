@@ -7,11 +7,13 @@
     <link rel="icon" type="image/x-icon" href="./Logo/Logo.jpg" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#141414" />
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="icon" type="image/x-icon" href="./Logo/Logo.jpg" />
+    <link rel="manifest" href="manifest.json" />
     <title>ITHIHAS - Indian Traditional Heritage Interactive Audio Stories</title>
     <style>
         :root[data-theme="light"] {
@@ -128,53 +130,9 @@
             transition: all 0.3s ease;
         }
 
-        .search-container i {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-color);
-            opacity: 0.7;
-        }
-
         .search-bar:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 2px var(--primary-color-alpha);
-        }
-
-        .search-bar:focus + i {
-            color: var(--primary-color);
-            opacity: 1;
-        }
-
-        #authButtons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        #authButtons a {
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        #authButtons a:first-child {
-            color: var(--text-color);
-            background: transparent;
-            border: 2px solid var(--border-color);
-        }
-
-        #authButtons a:last-child {
-            color: white;
-            background: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        #authButtons a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--shadow-color);
         }
 
         .theme-toggle {
@@ -198,98 +156,6 @@
             border-color: var(--primary-color);
         }
 
-        .theme-toggle i {
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .theme-toggle:hover i {
-            transform: rotate(360deg);
-        }
-
-        .theme-toggle span {
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        /* Card and Modal Styles */
-        .card, .modal-content {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px var(--shadow-color);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px var(--shadow-color);
-        }
-
-        /* Form Controls */
-        .form-control {
-            background-color: var(--input-bg);
-            color: var(--text-color);
-            border: 1px solid var(--input-border);
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px var(--primary-color-alpha);
-            background-color: var(--input-bg);
-        }
-
-        /* Navigation Links */
-        .nav-links a {
-            color: var(--text-color);
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Search Bar */
-        .search-bar {
-            background-color: var(--input-bg);
-            color: var(--text-color);
-            border: 1px solid var(--input-border);
-            transition: all 0.3s ease;
-        }
-
-        .search-bar:focus {
-            background-color: var(--input-bg);
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px var(--primary-color-alpha);
-        }
-
-        /* Dropdown Menu */
-        .dropdown-content {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px var(--shadow-color);
-        }
-
-        .dropdown-content a:hover {
-            background-color: var(--hover-bg);
-        }
-
-        /* Update existing styles to use CSS variables */
-        .modal-content {
-            background-color: var(--modal-bg);
-            color: var(--text-color);
-        }
-
-        .form-control {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-        }
-
-        /* Hero Section Enhancements */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -297,44 +163,14 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: linear-gradient(
-                135deg,
-                rgba(20, 20, 20, 0.9),
-                rgba(40, 40, 40, 0.8)
-            );
-            padding: 2rem;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('assets/images/hero-bg.jpg') center/cover no-repeat;
-            filter: brightness(0.3) saturate(1.2);
-            z-index: -1;
-        }
-
-        .hero-content {
-            position: relative;
-            max-width: 1200px;
-            width: 100%;
-            text-align: center;
-            z-index: 1;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.9), rgba(40, 40, 40, 0.8)),
+                        url('assets/images/temple-background.jpg') center/cover;
         }
 
         .hero-title {
             font-size: 4.5rem;
             font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(
-                45deg,
-                var(--primary-color),
-                #ff4b2b,
-                #ff416c
-            );
+            background: linear-gradient(45deg, var(--primary-color), #ff4b2b, #ff416c);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -342,23 +178,11 @@
             animation: titleGlow 3s ease-in-out infinite;
         }
 
-        @keyframes titleGlow {
-            0%, 100% {
-                filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.3));
-            }
-            50% {
-                filter: drop-shadow(0 0 20px rgba(229, 9, 20, 0.5));
-            }
-        }
-
         .hero-subtitle {
             font-size: 1.8rem;
             line-height: 1.6;
             margin-bottom: 2.5rem;
             color: rgba(255, 255, 255, 0.9);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .hero-buttons {
@@ -382,10 +206,6 @@
             cursor: pointer;
         }
 
-        .scroll-indicator:hover {
-            opacity: 1;
-        }
-
         .scroll-indicator .mouse {
             width: 30px;
             height: 50px;
@@ -407,41 +227,6 @@
             animation: scrollWheel 2s ease-in-out infinite;
         }
 
-        @keyframes scrollWheel {
-            0% {
-                transform: translate(-50%, 0);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, 20px);
-                opacity: 0;
-            }
-        }
-
-        .scroll-indicator .text {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .epic-showcase {
-            padding: 4rem 2rem;
-            background: var(--secondary-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .epic-cards-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 2rem 0;
-        }
-
         .epic-card {
             flex: 1;
             min-width: 300px;
@@ -453,706 +238,11 @@
             cursor: pointer;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 20px var(--shadow-color);
-            transform-origin: center center;
-        }
-
-        .epic-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, 
-                rgba(0,0,0,0.9) 0%,
-                rgba(0,0,0,0.5) 30%,
-                rgba(0,0,0,0.1) 100%
-            );
-            opacity: 0.7;
-            transition: opacity 0.5s ease;
-            z-index: 1;
-        }
-
-        .epic-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .epic-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem;
-            z-index: 2;
-            transform: translateY(70%);
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .epic-content h3 {
-            color: white;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .epic-content p {
-            color: rgba(255,255,255,0.9);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .epic-cards-container:hover .epic-card:not(:hover) {
-            transform: scale(0.95);
-            filter: brightness(0.4);
         }
 
         .epic-card:hover {
             transform: scale(1.05) translateY(-10px);
             box-shadow: 0 20px 40px var(--shadow-color);
-        }
-
-        .epic-card:hover::before {
-            opacity: 0.4;
-        }
-
-        .epic-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .epic-card:hover .epic-content {
-            transform: translateY(0);
-        }
-
-        .epic-btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .epic-card:hover .epic-btn {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .epic-btn:hover {
-            background: #f40612;
-            box-shadow: 0 4px 12px rgba(229, 9, 20, 0.5);
-        }
-
-        .story-generator-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(45deg, var(--secondary-color), #1a1a1a);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .story-generator-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .generator-content {
-            animation: slideInLeft 1s var(--animation-curve);
-        }
-
-        .generator-preview {
-            position: relative;
-            height: 500px;
-            border-radius: 12px;
-            overflow: hidden;
-            animation: slideInRight 1s var(--animation-curve);
-        }
-
-        .generator-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .generator-preview::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(229, 9, 20, 0.5), rgba(0, 0, 0, 0.5));
-        }
-
-        .generator-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .featured-scene {
-            padding: 4rem 2rem;
-            background: var(--card-bg);
-        }
-
-        .scene-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-100px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(100px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .story-generator-container {
-                grid-template-columns: 1fr;
-            }
-
-            .scene-container {
-                grid-template-columns: 1fr;
-            }
-
-            .epic-card {
-                min-width: 100%;
-            }
-        }
-
-        /* Add Netflix-style avatar styles */
-        .avatar {
-            width: 32px;
-            height: 32px;
-            background: #e50914;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .avatar:hover {
-            background: #f40612;
-        }
-
-        .profile-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #141414;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
-            border: 1px solid #333;
-            border-radius: 4px;
-            z-index: 1;
-        }
-
-        .profile-dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-content a {
-            color: #fff;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background-color 0.3s ease;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #333;
-        }
-
-        /* Animated Background */
-        .hero {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(45deg, 
-                rgba(20, 20, 20, 0.9),
-                rgba(229, 9, 20, 0.8)),
-                url('assets/images/Ayodhya.jpeg') center/cover;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
-            z-index: 1;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Floating Elements Animation */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Glowing Text Effect */
-        .glow-text {
-            animation: glowing 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glowing {
-            from { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color); }
-            to { text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color), 0 0 40px var(--primary-color); }
-        }
-
-        /* Navigation Hover Effects */
-        .nav-links a {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-            left: 0;
-        }
-
-        .nav-links a i {
-            transition: transform 0.3s ease;
-        }
-
-        .nav-links a:hover i {
-            transform: scale(1.2) rotate(360deg);
-        }
-
-        /* Card Hover Effects */
-        .epic-card {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .epic-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .epic-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, 
-                rgba(229, 9, 20, 0.5),
-                rgba(0, 0, 0, 0.8));
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .epic-card:hover::before {
-            opacity: 1;
-        }
-
-        /* Particle Effects */
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        /* Particle System Styles */
-        .particle-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(229, 9, 20, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-        }
-
-        /* Hero Section Particles */
-        .hero-particles .particle {
-            animation: heroParticleFloat 4s ease-in-out infinite;
-            background: rgba(var(--particle-color), 0.3);
-        }
-
-        @keyframes heroParticleFloat {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-100px) scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Feature Section Particles */
-        .featured-particles .particle {
-            background: rgba(255, 255, 255, 0.3);
-            filter: blur(1px);
-            animation: featuredParticleSwirl 6s ease-in-out infinite;
-        }
-
-        @keyframes featuredParticleSwirl {
-            0% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-                opacity: 0;
-            }
-            25% {
-                opacity: 0.4;
-            }
-            50% {
-                transform: translate(var(--x), var(--y)) rotate(180deg) scale(1.5);
-                opacity: 0.6;
-            }
-            75% {
-                opacity: 0.4;
-            }
-            100% {
-                transform: translate(calc(var(--x) * 2), calc(var(--y) * 2)) rotate(360deg) scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Quick Links Particles */
-        .quicklinks-particles .particle {
-            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-            animation: quicklinksParticleFloat 5s ease-in-out infinite;
-            backdrop-filter: blur(2px);
-        }
-
-        @keyframes quicklinksParticleFloat {
-            0% {
-                transform: translate(0, 0) scale(0.5);
-                opacity: 0;
-            }
-            25% {
-                transform: translate(var(--x), var(--y)) scale(1);
-                opacity: 0.4;
-            }
-            75% {
-                transform: translate(calc(var(--x) * 1.5), calc(var(--y) * 1.5)) scale(1.5);
-                opacity: 0.2;
-            }
-            100% {
-                transform: translate(calc(var(--x) * 2), calc(var(--y) * 2)) scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Enhanced Section Styles */
-        .section {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section:hover .particle-container .particle {
-            animation-play-state: running;
-        }
-
-        /* Particle Trail Effect */
-        .particle-trail {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .trail {
-            position: absolute;
-            background: radial-gradient(circle at center,
-                rgba(229, 9, 20, 0.2),
-                transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-            animation: trailFade 1s ease-out forwards;
-        }
-
-        @keyframes trailFade {
-            0% {
-                transform: scale(0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 0;
-            }
-        }
-
-        /* Content Animation Classes */
-        .slide-up {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .slide-up.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in {
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
-
-        .fade-in.active {
-            opacity: 1;
-        }
-
-        /* Scroll Progress Indicator */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), #ff4b2b);
-            z-index: 1000;
-            transition: width 0.1s ease;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-color);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #ff4b2b;
-        }
-
-        /* Theme Toggle Animation */
-        .theme-toggle {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .theme-toggle::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-        }
-
-        .theme-toggle:hover::before {
-            width: 200%;
-            height: 200%;
-        }
-
-        /* Cosmic Background Animation */
-        .cosmic-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 0;
-        }
-
-        .stars, .twinkling, .clouds {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .stars {
-            background: #000 url('assets/images/stars.png') repeat top center;
-            z-index: 0;
-        }
-
-        .twinkling {
-            background: transparent url('assets/images/twinkling.png') repeat top center;
-            z-index: 1;
-            animation: move-twinkle 200s linear infinite;
-        }
-
-        .clouds {
-            background: transparent url('assets/images/clouds.png') repeat top center;
-            z-index: 2;
-            animation: move-clouds 100s linear infinite;
-        }
-
-        @keyframes move-twinkle {
-            from { background-position: 0 0; }
-            to { background-position: -10000px 5000px; }
-        }
-
-        @keyframes move-clouds {
-            from { background-position: 0 0; }
-            to { background-position: 10000px 0; }
-        }
-
-        /* Story Generator Section Styles */
-        .story-generator-section {
-            position: relative;
-            min-height: 100vh;
-            padding: 4rem 2rem;
-            overflow: hidden;
-        }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 3;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 3.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary-color);
-        }
-
-        /* Floating Scroll Animation */
-        .floating-scroll {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-        }
-
-        .scroll-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .magical-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, 
-                rgba(255, 215, 0, 0.3) 0%,
-                rgba(255, 215, 0, 0) 70%);
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-        }
-
-        /* Enchanted Text Styles */
-        .enchanted-text {
-            font-size: 1.5rem;
-            text-align: center;
-            margin: 2rem 0;
-            line-height: 1.6;
-        }
-
-        .highlight-text {
-            color: var(--primary-color);
-            font-weight: bold;
-            position: relative;
-        }
-
-        .highlight-text::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                var(--primary-color), 
-                transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        /* Feature Cards */
-        .feature-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
         }
 
         .feature-card {
@@ -1171,700 +261,83 @@
             border-color: var(--primary-color);
         }
 
-        .magical-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* CTA Button Styles */
-        .cta-button {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem 2rem;
-            margin: 2rem auto;
-            font-size: 1.2rem;
-            color: #fff;
-            background: linear-gradient(45deg, var(--primary-color), #ff4b2b);
-            border-radius: 50px;
-            text-decoration: none;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-            transform: rotate(45deg);
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover::before {
-            transform: rotate(45deg) translate(50%, 50%);
-        }
-
-        .button-text {
-            position: relative;
-            z-index: 1;
-            margin-right: 1rem;
-        }
-
-        .button-icon {
-            position: relative;
-            z-index: 1;
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .cta-button:hover .button-icon {
-            transform: rotate(360deg);
-        }
-
-        .button-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .section-title {
+            .hero-title {
                 font-size: 2.5rem;
             }
-
-            .enchanted-text {
-                font-size: 1.2rem;
+            
+            .hero-features {
+                flex-direction: column;
+                gap: 1rem;
             }
-
-            .feature-cards {
-                grid-template-columns: 1fr;
+            
+            .feature {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
             }
         }
 
-        /* Enhanced Cosmic Background */
-        .cosmic-background {
-            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
-        }
-
-        .stars {
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
-            background-repeat: repeat;
-            animation: twinkle 5s ease-in-out infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 0.4; }
-        }
-
-        /* Feature Cards */
-        .feature-card {
-            background: rgba(20, 20, 20, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-card:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.2);
-        }
-
-        .card-glow {
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-                rgba(229, 9, 20, 0.2) 0%,
-                transparent 80%);
-        }
-
-        /* Epic CTA Button */
-        .cta-container {
+        .quick-explore {
             position: relative;
-            text-align: center;
-            margin-top: 3rem;
-            padding: 1rem;
-            perspective: 1000px;
+            padding: 4rem 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
         }
 
-        .epic-cta {
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .explore-card {
             position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.8rem 3.5rem;
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            overflow: hidden;
-            background: linear-gradient(45deg, 
-                #1a1a1a,
-                var(--primary-color),
-                #1a1a1a);
-            background-size: 300% 300%;
-            animation: gradientShift 8s ease infinite;
-            border-radius: 50px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 
-                0 10px 30px rgba(229, 9, 20, 0.3),
-                0 0 0 2px rgba(229, 9, 20, 0.3),
-                inset 0 0 15px rgba(229, 9, 20, 0.3);
-            transform-style: preserve-3d;
-            transform: translateZ(0);
-        }
-
-        .epic-cta:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, 
-                rgba(229, 9, 20, 0.5), 
-                transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .epic-cta:hover {
-            transform: translateY(-5px) translateZ(10px);
-            box-shadow: 
-                0 20px 40px rgba(229, 9, 20, 0.4),
-                0 0 0 4px rgba(229, 9, 20, 0.4),
-                inset 0 0 30px rgba(229, 9, 20, 0.4);
-        }
-
-        .epic-cta:hover:before {
-            opacity: 1;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .cta-text {
-            position: relative;
-            z-index: 2;
-            background: linear-gradient(to right, #fff, #ff9966, #fff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: textShine 3s linear infinite;
-        }
-
-        @keyframes textShine {
-            0% { background-position: -500% 50%; }
-            100% { background-position: 500% 50%; }
-        }
-
-        .cta-effects {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .cta-particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            border-radius: 50%;
-            background: #fff;
-            pointer-events: none;
-            opacity: 0;
-        }
-
-        .epic-cta:hover .cta-particle:nth-child(1) {
-            animation: particleBurst1 1.2s ease-out infinite;
-        }
-
-        .epic-cta:hover .cta-particle:nth-child(2) {
-            animation: particleBurst2 1.2s ease-out infinite 0.2s;
-        }
-
-        .epic-cta:hover .cta-particle:nth-child(3) {
-            animation: particleBurst3 1.2s ease-out infinite 0.4s;
-        }
-
-        @keyframes particleBurst1 {
-            0% { 
-                transform: translate(0, 0) scale(1); 
-                opacity: 1;
-                box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
-            }
-            100% { 
-                transform: translate(-50px, -50px) scale(0); 
-                opacity: 0;
-                box-shadow: 0 0 0 rgba(229, 9, 20, 0);
-            }
-        }
-
-        @keyframes particleBurst2 {
-            0% { 
-                transform: translate(0, 0) scale(1); 
-                opacity: 1;
-                box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
-            }
-            100% { 
-                transform: translate(50px, -50px) scale(0); 
-                opacity: 0;
-                box-shadow: 0 0 0 rgba(229, 9, 20, 0);
-            }
-        }
-
-        @keyframes particleBurst3 {
-            0% { 
-                transform: translate(0, 0) scale(1); 
-                opacity: 1;
-                box-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
-            }
-            100% { 
-                transform: translate(0, -70px) scale(0); 
-                opacity: 0;
-                box-shadow: 0 0 0 rgba(229, 9, 20, 0);
-            }
-        }
-
-        .cta-border {
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border: 2px solid rgba(229, 9, 20, 0.3);
-            border-radius: 52px;
-            pointer-events: none;
-            animation: borderPulse 2s ease-out infinite;
-        }
-
-        @keyframes borderPulse {
-            0% { 
-                transform: scale(1);
-                border-color: rgba(229, 9, 20, 0.3);
-            }
-            50% { 
-                transform: scale(1.02);
-                border-color: rgba(229, 9, 20, 0.5);
-            }
-            100% { 
-                transform: scale(1);
-                border-color: rgba(229, 9, 20, 0.3);
-            }
-        }
-
-        /* Flame effect */
-        .epic-cta:after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, 
-                rgba(229, 9, 20, 0.4) 0%,
-                transparent 50%);
-            transform: rotate(0deg);
-            animation: flameEffect 3s ease-in-out infinite;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .epic-cta:hover:after {
-            opacity: 1;
-        }
-
-        @keyframes flameEffect {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Energy field effect */
-        .energy-field {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 50px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    rgba(229, 9, 20, 0.1) 0%,
-                    rgba(229, 9, 20, 0.2) 10%,
-                    rgba(229, 9, 20, 0.1) 20%
-                );
-            background-size: 200% 200%;
-            animation: energyFlow 3s linear infinite;
-        }
-
-        .epic-cta:hover .energy-field {
-            opacity: 1;
-        }
-
-        @keyframes energyFlow {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 200% 200%; }
-        }
-
-        /* Section Partition */
-        .section-partition {
-            position: relative;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(229, 9, 20, 0.3) 20%, 
-                rgba(229, 9, 20, 0.5) 50%, 
-                rgba(229, 9, 20, 0.3) 80%, 
-                transparent 100%
-            );
-            margin: 4rem auto;
-            width: 80%;
-            overflow: visible;
-        }
-
-        .section-partition::before {
-            content: "❖";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--background-color);
-            padding: 0 20px;
-            color: rgba(229, 9, 20, 0.7);
-            font-size: 1.5rem;
-            text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
-        }
-
-        .section-partition::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(229, 9, 20, 0.2), 
-                transparent
-            );
-            animation: partitionGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes partitionGlow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* Quick Links Card Enhancements */
-        .quick-links .feature-card {
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .quick-links .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.2);
-        }
-
-        .quick-links .feature-card::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            transition: width 0.3s ease;
-        }
-
-        .quick-links .feature-card:hover::after {
-            width: 80%;
-        }
-
-        /* Featured Epics Card Enhancements */
-        .featured .feature-card {
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .featured .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                135deg,
-                rgba(229, 9, 20, 0.1),
-                rgba(255, 75, 43, 0.1)
-            );
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .featured .feature-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(229, 9, 20, 0.2);
-        }
-
-        .featured .feature-card:hover::before {
-            opacity: 1;
-        }
-
-        .featured .feature-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                var(--primary-color),
-                transparent
-            );
-            transform: translateX(-50%);
-            transition: width 0.4s ease;
-        }
-
-        .featured .feature-card:hover::after {
-            width: 80%;
-        }
-
-        .featured .feature-card .magical-icon {
-            position: relative;
-            z-index: 1;
-            transition: transform 0.4s ease, color 0.4s ease;
-        }
-
-        .featured .feature-card:hover .magical-icon {
-            transform: scale(1.1) rotate(360deg);
-            color: var(--primary-color);
-        }
-
-        .featured .feature-card h3 {
-            position: relative;
-            z-index: 1;
-            transition: color 0.4s ease;
-        }
-
-        .featured .feature-card:hover h3 {
-            color: var(--primary-color);
-        }
-
-        .featured .feature-card .card-glow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(
-                circle at var(--mouse-x) var(--mouse-y),
-                rgba(229, 9, 20, 0.2),
-                transparent 100px
-            );
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .featured .feature-card:hover .card-glow {
-            opacity: 1;
-        }
-
-        /* Hero Color Animation Effects */
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                45deg,
-                rgba(229, 9, 20, 0.2),
-                rgba(255, 75, 43, 0.2),
-                rgba(147, 112, 219, 0.2),
-                rgba(0, 191, 255, 0.2)
-            );
-            background-size: 400% 400%;
-            animation: gradientFlow 15s ease infinite;
-            mix-blend-mode: overlay;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero-title {
-            animation: titleAnimation 8s ease infinite;
-            background-size: 300% 300%;
-            background-image: linear-gradient(
-                45deg,
-                var(--primary-color),
-                #ff4b2b,
-                #ff416c,
-                #7928ca,
-                #ff0080,
-                var(--primary-color)
-            );
-        }
-
-        @keyframes titleAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero-content::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(
-                circle at center,
-                transparent 30%,
-                rgba(229, 9, 20, 0.1) 70%,
-                transparent 100%
-            );
-            animation: pulseGlow 8s ease-in-out infinite;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 0.3;
-            }
-            50% {
-                transform: scale(1.2) rotate(180deg);
-                opacity: 0.5;
-            }
-        }
-
-        .hero-subtitle {
-            position: relative;
-            animation: subtitleGlow 4s ease-in-out infinite;
-        }
-
-        @keyframes subtitleGlow {
-            0%, 100% {
-                text-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
-            }
-            50% {
-                text-shadow: 0 0 20px rgba(255, 75, 43, 0.5);
-            }
-        }
-
-        .hero-buttons {
-            position: relative;
-        }
-
-        .hero-buttons::after {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120%;
-            height: 1px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(229, 9, 20, 0.3),
-                transparent
-            );
-            animation: lineFlow 3s ease-in-out infinite;
-        }
-
-        @keyframes lineFlow {
-            0%, 100% {
-                width: 80%;
-                opacity: 0.3;
-            }
-            50% {
-                width: 120%;
-                opacity: 0.6;
-            }
-        }
-
-        /* Enhanced Scroll Indicator */
-        .scroll-indicator .mouse {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .scroll-indicator .mouse::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 2px solid transparent;
+            background: rgba(255,255,255,0.05);
             border-radius: 15px;
-            animation: borderGlow 4s linear infinite;
+            padding: 2rem;
+            overflow: hidden;
+            transition: all 0.4s var(--animation-curve);
         }
 
-        @keyframes borderGlow {
-            0% {
-                border-color: rgba(229, 9, 20, 0.3);
-                box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
-            }
-            33% {
-                border-color: rgba(255, 75, 43, 0.3);
-                box-shadow: 0 0 10px rgba(255, 75, 43, 0.3);
-            }
-            66% {
-                border-color: rgba(147, 112, 219, 0.3);
-                box-shadow: 0 0 10px rgba(147, 112, 219, 0.3);
-            }
-            100% {
-                border-color: rgba(229, 9, 20, 0.3);
-                box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
-            }
+        .explore-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .magical-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-effects {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .glow-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, 
+                        var(--accent-color) 0%, 
+                        transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .explore-card:hover .glow-overlay {
+            opacity: 0.1;
+        }
+
+        [data-cursor="explore"] {
+            cursor: pointer;
+        }
+
+        [data-cursor="explore"]:hover {
+            cursor: url('data:image/svg+xml;utf8,<svg .../>') 16 16, pointer;
         }
     </style>
 </head>
@@ -1906,16 +379,25 @@
         <div class="nav-right">
             <div class="search-container">
                 <input type="search" class="search-bar" placeholder="Search epics, stories, characters..." aria-label="Search content">
-                <i class="fas fa-search"></i>
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
             <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
                 <i class="fas fa-moon"></i>
                 <span class="theme-text">Dark</span>
             </button>
-            <div id="authButtons" style="display: none;">
-                <a href="login.html">Login</a>
-                <a href="registration.html">Register</a>
+            <div id="authButtons" class="auth-buttons">
+                <a href="login.html" class="auth-link">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </a>
+                <a href="registration.html" class="auth-link">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Register</span>
+                </a>
             </div>
+        </div>
         </div>
     </nav>
 
@@ -1955,37 +437,58 @@
             <div class="particle-container hero-particles"></div>
             <div class="particle-trail"></div>
             <div class="hero-content">
-                <h1 class="hero-title" data-aos="fade-down">Discover Ancient Wisdom</h1>
+                <div class="wisdom-container" data-aos="fade-down">
+                    <h1 class="hero-title">
+                        <span class="title-fragment">Discover</span>
+                        <span class="title-fragment">Ancient</span>
+                        <span class="title-fragment">Wisdom</span>
+                    </h1>
+                    <div class="divine-symbols">
+                        <span class="symbol">🕉️</span>
+                        <span class="symbol">☸️</span>
+                        <span class="symbol">✡️</span>
+                    </div>
+                </div>
+                
                 <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
-                    Explore the timeless stories and teachings of Indian epics through our AI-powered platform
+                    Journey through timeless tales of valor, wisdom, and dharma. Let the ancient stories guide your path to enlightenment.
                 </p>
+                
+                <div class="hero-features" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature">
+                        <i class="fas fa-book-reader"></i>
+                        <span>Interactive Stories</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-brain"></i>
+                        <span>AI-Powered Insights</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-om"></i>
+                        <span>Spiritual Wisdom</span>
+                    </div>
+                </div>
+        
                 <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
-                    <a href="story-generator.html" class="epic-cta">
-                        <span class="cta-text">Start Your Journey</span>
-                        <div class="cta-effects">
-                            <div class="cta-particle"></div>
-                            <div class="cta-particle"></div>
-                            <div class="cta-particle"></div>
-                        </div>
-                        <div class="energy-field"></div>
-                        <div class="cta-border"></div>
+                    <a href="story-generator.html" class="epic-cta primary-cta">
+                        <div class="cta-aura"></div>
+                        <span class="cta-text">Begin Your Journey</span>
+                        <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a href="about.html" class="epic-cta secondary">
-                        <span class="cta-text">Learn More</span>
-                        <div class="cta-effects">
-                            <div class="cta-particle"></div>
-                            <div class="cta-particle"></div>
-                        </div>
-                        <div class="energy-field"></div>
-                        <div class="cta-border"></div>
+                    <a href="about.html" class="epic-cta secondary-cta">
+                        <span class="cta-text">Explore More</span>
+                        <i class="fas fa-compass"></i>
                     </a>
                 </div>
             </div>
-            <div class="scroll-indicator" onclick="scrollToNextSection()">
+                   <button class="scroll-indicator" 
+                        onclick="scrollToNextSection()" 
+                        onKeyDown="if(event.key === 'Enter') scrollToNextSection()">
                 <div class="mouse"></div>
-                <span class="text">Scroll</span>
+                <span class="text">Scroll to Explore</span>
             </div>
         </section>
+        
 
         <section class="epic-showcase" id="explore">
             <div class="epic-cards-container">
@@ -2093,6 +596,45 @@
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Explore Section -->
+        <section class="quick-explore" data-aos="fade-up">
+            <div class="section-container">
+                <h2 class="section-title">Quick Explore</h2>
+                <div class="explore-grid">
+                    <a href="characters.html" class="explore-card" data-cursor="explore">
+                        <div class="card-content">
+                            <i class="fas fa-users magical-icon"></i>
+                            <h3>Characters</h3>
+                            <p>Discover legendary heroes and villains</p>
+                        </div>
+                        <div class="card-effects">
+                            <div class="glow-overlay"></div>
+                            <div class="particle-field"></div>
+                        </div>
+                    </a>
+
+                    <a href="teachings.html" class="explore-card" data-cursor="explore">
+                        <div class="card-content">
+                            <i class="fas fa-dharmachakra magical-icon"></i>
+                            <h3>Sacred Teachings</h3>
+                            <p>Ancient wisdom and timeless knowledge</p>
+                        </div>
+                        <div class="card-effects">
+                            <div class="glow-overlay"></div>
+                            <div class="particle-field"></div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="explore-cta">
+                    <a href="about.html" class="cta-button" data-cursor="discover">
+                        <span>Explore More</span>
+                        <div class="button-effects"></div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -2605,5 +1147,10 @@
             });
         });
     </script>
+    <script src="js/theme.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
 </body>
 </html>

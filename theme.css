@@ -1,0 +1,50 @@
+:root {
+    /* Core Colors */
+    --primary: #e50914;
+    --secondary: #141414;
+    --accent: #ffffff;
+    
+    /* System Colors */
+    --bg: var(--secondary);
+    --text: #FFFFFF;
+    --surface: rgba(255,255,255,0.05);
+    --border: rgba(255,255,255,0.1);
+    
+    /* Effects */
+    --glass: rgba(10,10,10,0.8);
+    --glow: rgba(100,255,218,0.2);
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  
+    /* Theme Variables */
+    --bg-color: var(--secondary);
+    --text-color: var(--accent);
+    --nav-bg: rgba(20, 20, 20, 0.95);
+    --card-bg: #1f1f1f;
+    --border-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    
+    /* Remove these from inline styles */
+    --modal-bg: #1f1f1f;
+    --input-bg: #2b2b2b;
+    --input-border: #404040;
+    --hover-bg: #2a2a2a;
+  }
+  
+  [data-theme="light"] {
+    --bg: #FFFFFF;
+    --text: var(--secondary);
+    --surface: rgba(0,0,0,0.05);
+    --border: rgba(0,0,0,0.1);
+    --glass: rgba(255,255,255,0.8);
+  
+    --bg-color: #ffffff;
+    --text-color: #141414;
+    --nav-bg: rgba(255, 255, 255, 0.95);
+    --card-bg: #f8f9fa;
+    --border-color: #e5e5e5;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --modal-bg: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #ced4da;
+    --hover-bg: #f0f0f0;
+  }
